@@ -1,0 +1,107 @@
+
+.footer {
+  width: 100%;
+  margin-top: auto;
+  background-color: #071d33;
+  color: #ffffff;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 1.2fr;
+  gap: 48px;
+  padding: 48px 7%;
+}
+
+
+.footer-brand-name {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+
+.accessibility-icon {
+  display: block;
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+
+.footer-brand-name:focus-visible {
+  outline: 3px solid #8dccff;
+  outline-offset: 4px;
+}
+
+
+.footer-brand p,
+.footer-contact p {
+  max-width: 340px;
+  margin: 18px 0 0;
+  color: #d5e3f0;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.footer-links h2,
+.footer-contact h2 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.footer-links a {
+  color: #d5e3f0;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #8dccff;
+}
+
+.footer-links a:focus-visible,
+.footer-brand a:focus-visible {
+  outline: 3px solid #8dccff;
+  outline-offset: 4px;
+}
+
+.footer-bottom {
+  padding: 18px 7%;
+  border-top: 1px solid #294158;
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: #d5e3f0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 36px 6%;
+  }
+
+  .footer-bottom {
+    padding: 18px 6%;
+  }
+}
