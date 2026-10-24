@@ -3,11 +3,16 @@ dotenv.config({ override: true });
 
 import express from "express";
 import { prisma } from "./db/prisma.js";
+import { adminRouter } from "./routes/admin.routes.js";
+import { authRouter } from "./routes/auth.routes.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+
+app.use("/api/auth", authRouter);
+app.use("/api/admin", adminRouter);
 
 // Rota raiz inicial
 app.get("/", async (_req, res) => {
