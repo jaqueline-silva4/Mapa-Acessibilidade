@@ -19,7 +19,7 @@ const Header = () => {
 
       <Navbar />
 
-      <a className="header-login" href="#login">
+      <a className="header-login" href="/login">
         Login
       </a>
     </header>
