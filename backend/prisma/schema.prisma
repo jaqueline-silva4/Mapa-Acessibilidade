@@ -9,3 +9,44 @@ generator client {
 datasource db {
   provider = "mysql"
 }
+
+enum Role {
+  ADMIN
+  INSTITUTION
+}
+
+enum AccountStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+model User {
+  id                  Int           @id @default(autoincrement())
+  name                String
+  login               String        @unique // CNPJ (14 dígitos) para INSTITUTION; identificador próprio para ADMIN
+  email               String        @unique
+  passwordHash        String
+  role                Role
+  status              AccountStatus @default(ACTIVE)
+  isTemporaryPassword Boolean       @default(false)
+  failedLoginAttempts Int           @default(0)
+  lockedUntil         DateTime?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  passwordResetTokens PasswordResetToken[]
+}
+
+model PasswordResetToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
