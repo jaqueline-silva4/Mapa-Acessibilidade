@@ -1,3 +1,5 @@
+import './Sobre.css'
+
 function Sobre () {
     return (
         <div>Sobre</div>
