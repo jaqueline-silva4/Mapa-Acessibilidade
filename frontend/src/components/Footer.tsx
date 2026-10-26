@@ -18,11 +18,11 @@ const Footer = () => {
 
         <div className="footer-links">
           <h2>Navegação</h2>
-          <a href="#inicio">Início</a>
-          <a href="#instituicoes">Instituições</a>
-          <a href="#mapa">Mapa</a>
-          <a href="#sobre">Sobre</a>
-          <a href="#faq">FAQ</a>
+          <a href="/">Início</a>
+          <a href="/instituicoes">Instituições</a>
+          <a href="/mapa">Mapa</a>
+          <a href="/sobre">Sobre</a>
+          <a href="/faq">FAQ</a>
         </div>
 
         <div className="footer-contact">

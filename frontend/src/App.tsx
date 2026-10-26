@@ -1,59 +1,30 @@
-import Header from './components/Header'
-import Footer from './components/Footer'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import MainLayout from './layouts/MainLayout'
+
+import Home from './pages/Home'
+import Instituicoes from './pages/Instituicoes'
+import Mapa from './pages/Mapa'
+import Sobre from './pages/Sobre'
+import FAQ from './pages/FAQ'
+import Login from './pages/Login'
+
+import './App.css'
 
 function App() {
   return (
-    <>
-      <a className="skip-link" href="#conteudo-principal">
-        Pular para o conteúdo principal
-      </a>
-
-      <Header />
-
-      <main id="conteudo-principal" tabIndex={-1}>
-        <section className="hero" id="inicio">
-          <div className="hero-content">
-            <span className="hero-eyebrow">
-              PLATAFORMA DE ACESSIBILIDADE
-            </span>
-
-            <h1>
-              Acessibilidade
-              <br />
-              para todos!
-            </h1>
-
-            <p>
-              Encontre instituições acessíveis, consulte recursos disponíveis
-              e ajude a construir ambientes mais inclusivos.
-            </p>
-
-            <div className="hero-actions">
-              <a className="button button-primary" href="#busca-instituicao">
-                <img className="search-icon" src="/lupa.png" alt="" aria-hidden="true" />
-                Buscar instituição
-              </a>
-
-              <a className="button button-secondary" href="#sobre">
-                Saiba mais
-              </a>
-            </div>
-          </div>
-
-          <div className="hero-image">
-            <img
-              src='/ilustracao-acessibilidade.png' 
-              alt='Pessoas com deficiência, incluindo uma pessoa usando cadeira de rodas, uma pessoa com deficiência visual acompanhada de um cão-guia e uma pessoa com prótese'> 
-            </img>
-
-          </div>
-        </section>
-      </main>
-
-      <Footer/>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/instituicoes" element={<Instituicoes />} />
+          <Route path="/mapa" element={<Mapa />} />
+          <Route path="/sobre" element={<Sobre />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
