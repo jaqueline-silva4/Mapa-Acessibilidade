@@ -10,4 +10,7 @@
  */
 export type * from './models/User.js'
 export type * from './models/PasswordResetToken.js'
+export type * from './models/AccessibilityCategory.js'
+export type * from './models/AccessibilityPoint.js'
+export type * from './models/AccessibilityImage.js'
 export type * from './commonInputTypes.js'

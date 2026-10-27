@@ -52,7 +52,10 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  PasswordResetToken: 'PasswordResetToken'
+  PasswordResetToken: 'PasswordResetToken',
+  AccessibilityCategory: 'AccessibilityCategory',
+  AccessibilityPoint: 'AccessibilityPoint',
+  AccessibilityImage: 'AccessibilityImage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -101,6 +104,41 @@ export const PasswordResetTokenScalarFieldEnum = {
 export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
 
 
+export const AccessibilityCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  icon: 'icon'
+} as const
+
+export type AccessibilityCategoryScalarFieldEnum = (typeof AccessibilityCategoryScalarFieldEnum)[keyof typeof AccessibilityCategoryScalarFieldEnum]
+
+
+export const AccessibilityPointScalarFieldEnum = {
+  id: 'id',
+  institutionId: 'institutionId',
+  categoryId: 'categoryId',
+  title: 'title',
+  description: 'description',
+  active: 'active',
+  reportCount: 'reportCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccessibilityPointScalarFieldEnum = (typeof AccessibilityPointScalarFieldEnum)[keyof typeof AccessibilityPointScalarFieldEnum]
+
+
+export const AccessibilityImageScalarFieldEnum = {
+  id: 'id',
+  pointId: 'pointId',
+  imageUrl: 'imageUrl',
+  altText: 'altText',
+  createdAt: 'createdAt'
+} as const
+
+export type AccessibilityImageScalarFieldEnum = (typeof AccessibilityImageScalarFieldEnum)[keyof typeof AccessibilityImageScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -132,4 +170,28 @@ export const PasswordResetTokenOrderByRelevanceFieldEnum = {
 } as const
 
 export type PasswordResetTokenOrderByRelevanceFieldEnum = (typeof PasswordResetTokenOrderByRelevanceFieldEnum)[keyof typeof PasswordResetTokenOrderByRelevanceFieldEnum]
+
+
+export const AccessibilityCategoryOrderByRelevanceFieldEnum = {
+  name: 'name',
+  icon: 'icon'
+} as const
+
+export type AccessibilityCategoryOrderByRelevanceFieldEnum = (typeof AccessibilityCategoryOrderByRelevanceFieldEnum)[keyof typeof AccessibilityCategoryOrderByRelevanceFieldEnum]
+
+
+export const AccessibilityPointOrderByRelevanceFieldEnum = {
+  title: 'title',
+  description: 'description'
+} as const
+
+export type AccessibilityPointOrderByRelevanceFieldEnum = (typeof AccessibilityPointOrderByRelevanceFieldEnum)[keyof typeof AccessibilityPointOrderByRelevanceFieldEnum]
+
+
+export const AccessibilityImageOrderByRelevanceFieldEnum = {
+  imageUrl: 'imageUrl',
+  altText: 'altText'
+} as const
+
+export type AccessibilityImageOrderByRelevanceFieldEnum = (typeof AccessibilityImageOrderByRelevanceFieldEnum)[keyof typeof AccessibilityImageOrderByRelevanceFieldEnum]
 
