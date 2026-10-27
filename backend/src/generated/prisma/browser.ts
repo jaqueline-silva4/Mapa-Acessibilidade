@@ -27,3 +27,18 @@ export type User = Prisma.UserModel
  * 
  */
 export type PasswordResetToken = Prisma.PasswordResetTokenModel
+/**
+ * Model AccessibilityCategory
+ * 
+ */
+export type AccessibilityCategory = Prisma.AccessibilityCategoryModel
+/**
+ * Model AccessibilityPoint
+ * 
+ */
+export type AccessibilityPoint = Prisma.AccessibilityPointModel
+/**
+ * Model AccessibilityImage
+ * 
+ */
+export type AccessibilityImage = Prisma.AccessibilityImageModel

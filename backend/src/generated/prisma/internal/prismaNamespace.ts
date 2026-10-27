@@ -398,7 +398,10 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  PasswordResetToken: 'PasswordResetToken'
+  PasswordResetToken: 'PasswordResetToken',
+  AccessibilityCategory: 'AccessibilityCategory',
+  AccessibilityPoint: 'AccessibilityPoint',
+  AccessibilityImage: 'AccessibilityImage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "passwordResetToken"
+    modelProps: "user" | "passwordResetToken" | "accessibilityCategory" | "accessibilityPoint" | "accessibilityImage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -550,6 +553,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AccessibilityCategory: {
+      payload: Prisma.$AccessibilityCategoryPayload<ExtArgs>
+      fields: Prisma.AccessibilityCategoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AccessibilityCategoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityCategoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AccessibilityCategoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityCategoryPayload>
+        }
+        findFirst: {
+          args: Prisma.AccessibilityCategoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityCategoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AccessibilityCategoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityCategoryPayload>
+        }
+        findMany: {
+          args: Prisma.AccessibilityCategoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityCategoryPayload>[]
+        }
+        create: {
+          args: Prisma.AccessibilityCategoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityCategoryPayload>
+        }
+        createMany: {
+          args: Prisma.AccessibilityCategoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AccessibilityCategoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityCategoryPayload>
+        }
+        update: {
+          args: Prisma.AccessibilityCategoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityCategoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.AccessibilityCategoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AccessibilityCategoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AccessibilityCategoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityCategoryPayload>
+        }
+        aggregate: {
+          args: Prisma.AccessibilityCategoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAccessibilityCategory>
+        }
+        groupBy: {
+          args: Prisma.AccessibilityCategoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccessibilityCategoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AccessibilityCategoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccessibilityCategoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    AccessibilityPoint: {
+      payload: Prisma.$AccessibilityPointPayload<ExtArgs>
+      fields: Prisma.AccessibilityPointFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AccessibilityPointFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityPointPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AccessibilityPointFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityPointPayload>
+        }
+        findFirst: {
+          args: Prisma.AccessibilityPointFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityPointPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AccessibilityPointFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityPointPayload>
+        }
+        findMany: {
+          args: Prisma.AccessibilityPointFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityPointPayload>[]
+        }
+        create: {
+          args: Prisma.AccessibilityPointCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityPointPayload>
+        }
+        createMany: {
+          args: Prisma.AccessibilityPointCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AccessibilityPointDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityPointPayload>
+        }
+        update: {
+          args: Prisma.AccessibilityPointUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityPointPayload>
+        }
+        deleteMany: {
+          args: Prisma.AccessibilityPointDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AccessibilityPointUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AccessibilityPointUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityPointPayload>
+        }
+        aggregate: {
+          args: Prisma.AccessibilityPointAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAccessibilityPoint>
+        }
+        groupBy: {
+          args: Prisma.AccessibilityPointGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccessibilityPointGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AccessibilityPointCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccessibilityPointCountAggregateOutputType> | number
+        }
+      }
+    }
+    AccessibilityImage: {
+      payload: Prisma.$AccessibilityImagePayload<ExtArgs>
+      fields: Prisma.AccessibilityImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AccessibilityImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AccessibilityImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityImagePayload>
+        }
+        findFirst: {
+          args: Prisma.AccessibilityImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AccessibilityImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityImagePayload>
+        }
+        findMany: {
+          args: Prisma.AccessibilityImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityImagePayload>[]
+        }
+        create: {
+          args: Prisma.AccessibilityImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityImagePayload>
+        }
+        createMany: {
+          args: Prisma.AccessibilityImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AccessibilityImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityImagePayload>
+        }
+        update: {
+          args: Prisma.AccessibilityImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.AccessibilityImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AccessibilityImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AccessibilityImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AccessibilityImagePayload>
+        }
+        aggregate: {
+          args: Prisma.AccessibilityImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAccessibilityImage>
+        }
+        groupBy: {
+          args: Prisma.AccessibilityImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccessibilityImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AccessibilityImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccessibilityImageCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -619,6 +820,41 @@ export const PasswordResetTokenScalarFieldEnum = {
 export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
 
 
+export const AccessibilityCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  icon: 'icon'
+} as const
+
+export type AccessibilityCategoryScalarFieldEnum = (typeof AccessibilityCategoryScalarFieldEnum)[keyof typeof AccessibilityCategoryScalarFieldEnum]
+
+
+export const AccessibilityPointScalarFieldEnum = {
+  id: 'id',
+  institutionId: 'institutionId',
+  categoryId: 'categoryId',
+  title: 'title',
+  description: 'description',
+  active: 'active',
+  reportCount: 'reportCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AccessibilityPointScalarFieldEnum = (typeof AccessibilityPointScalarFieldEnum)[keyof typeof AccessibilityPointScalarFieldEnum]
+
+
+export const AccessibilityImageScalarFieldEnum = {
+  id: 'id',
+  pointId: 'pointId',
+  imageUrl: 'imageUrl',
+  altText: 'altText',
+  createdAt: 'createdAt'
+} as const
+
+export type AccessibilityImageScalarFieldEnum = (typeof AccessibilityImageScalarFieldEnum)[keyof typeof AccessibilityImageScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -650,6 +886,30 @@ export const PasswordResetTokenOrderByRelevanceFieldEnum = {
 } as const
 
 export type PasswordResetTokenOrderByRelevanceFieldEnum = (typeof PasswordResetTokenOrderByRelevanceFieldEnum)[keyof typeof PasswordResetTokenOrderByRelevanceFieldEnum]
+
+
+export const AccessibilityCategoryOrderByRelevanceFieldEnum = {
+  name: 'name',
+  icon: 'icon'
+} as const
+
+export type AccessibilityCategoryOrderByRelevanceFieldEnum = (typeof AccessibilityCategoryOrderByRelevanceFieldEnum)[keyof typeof AccessibilityCategoryOrderByRelevanceFieldEnum]
+
+
+export const AccessibilityPointOrderByRelevanceFieldEnum = {
+  title: 'title',
+  description: 'description'
+} as const
+
+export type AccessibilityPointOrderByRelevanceFieldEnum = (typeof AccessibilityPointOrderByRelevanceFieldEnum)[keyof typeof AccessibilityPointOrderByRelevanceFieldEnum]
+
+
+export const AccessibilityImageOrderByRelevanceFieldEnum = {
+  imageUrl: 'imageUrl',
+  altText: 'altText'
+} as const
+
+export type AccessibilityImageOrderByRelevanceFieldEnum = (typeof AccessibilityImageOrderByRelevanceFieldEnum)[keyof typeof AccessibilityImageOrderByRelevanceFieldEnum]
 
 
 
@@ -859,6 +1119,9 @@ export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaC
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   passwordResetToken?: Prisma.PasswordResetTokenOmit
+  accessibilityCategory?: Prisma.AccessibilityCategoryOmit
+  accessibilityPoint?: Prisma.AccessibilityPointOmit
+  accessibilityImage?: Prisma.AccessibilityImageOmit
 }
 
 /* Types for Logging */
