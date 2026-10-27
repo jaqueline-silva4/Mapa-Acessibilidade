@@ -12,7 +12,7 @@ const links = [
 
 export default function Navbar() {
   return (
-    <nav className="navbar" aria-label="Navegação principal">
+    <nav id="menu-principal" tabIndex={-1} className="navbar" aria-label="Navegação principal">
       <ul className="navbar-list">
         {links.map((link) => (
           <li key={link.href}>

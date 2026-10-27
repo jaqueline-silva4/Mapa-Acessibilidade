@@ -1,4 +1,3 @@
-
 .header {
   width: 100%;
   min-height: 82px;
@@ -21,8 +20,9 @@
 
 .header-logo {
   display: block;
-  width: 130px;
-  max-height: 48px;
+  width: calc(130px * var(--font-scale, 1));
+  max-width: 100%;
+  max-height: calc(48px * var(--font-scale, 1));
   object-fit: contain;
 }
 
@@ -38,7 +38,7 @@
   border-radius: 24px;
   background-color: #071d33;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
   transition: background-color 0.2s ease;
@@ -78,19 +78,54 @@
   }
 }
 
+
 @media (max-width: 600px) {
   .header {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    align-items: stretch;
+    gap: 16px;
     padding: 16px;
+    min-width: 0;
+  }
+
+  .header-brand {
+    align-self: center;
+    margin-left: 0;
   }
 
   .header-logo {
     width: 120px;
+    max-width: 100%;
+  }
+
+  .header nav {
+    width: 100%;
+    min-width: 0;
+    justify-self: auto;
+  }
+
+  .header nav .navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 18px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .header nav .navbar a {
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .header-login {
+    align-self: center;
+    justify-self: auto;
+    margin-right: 0;
     min-height: 44px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
+

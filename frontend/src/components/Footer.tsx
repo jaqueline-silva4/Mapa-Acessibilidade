@@ -3,7 +3,7 @@ import './Footer.css'
 
 const Footer = () => {
   return (
-    <footer className="footer" id="sobre">
+    <footer className="footer" tabIndex={-1} id="rodape">
       <div className="footer-content">
         <div className="footer-brand">
           <a className="footer-brand-name" href="#inicio" aria-label="Acessa+ - Início">

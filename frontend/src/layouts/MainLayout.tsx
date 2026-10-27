@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -9,10 +9,20 @@ function MainLayout() {
   const [highContrast, setHighContrast] = useState(false)
   const [fontScale, setFontScale] = useState(1)
 
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      '--font-scale',
+      String(fontScale)
+    )
+
+    return () => {
+      document.documentElement.style.removeProperty('--font-scale')
+    }
+  }, [fontScale])
+
   return (
     <div
       className={`app-layout ${highContrast ? 'high-contrast' : ''}`}
-      style={{ fontSize: `${fontScale * 100}%` }}
     >
       <a className="skip-link" href="#conteudo-principal">
         Pular para o conteúdo principal
