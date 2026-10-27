@@ -1,0 +1,176 @@
+
+.accessibility-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  padding: 10px 3%;
+  background-color: #071d33;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.accessibility-shortcuts {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.accessibility-shortcuts a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+
+.accessibility-shortcuts a:hover {
+  text-decoration: underline;
+}
+
+/* Área dos controles */
+.accessibility-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+
+.accessibility-bar-title {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.text-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.text-controls span {
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+/* Botões da barra */
+.accessibility-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #ffffff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.accessibility-controls button:hover:not(:disabled) {
+  background-color: #ffffff;
+  color: #071d33;
+}
+
+/* Foco visível ao navegar pelo teclado */
+.accessibility-controls button:focus-visible,
+.accessibility-shortcuts a:focus-visible {
+  outline: 3px solid #8dccff;
+  outline-offset: 3px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Botões indisponíveis */
+.accessibility-controls button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Evita quebra de texto nos controles */
+.accessibility-toggle {
+  white-space: nowrap;
+}
+
+/* Alto contraste */
+.high-contrast .accessibility-bar {
+  background-color: #000000;
+  color: #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+
+.high-contrast .accessibility-shortcuts a {
+  color: #ffff00;
+}
+
+.high-contrast .accessibility-controls button {
+  color: #ffff00;
+  border-color: #ffff00;
+}
+
+.high-contrast .accessibility-controls button:hover:not(:disabled) {
+  background-color: #ffff00;
+  color: #000000;
+}
+
+.high-contrast .accessibility-controls button:focus-visible,
+.high-contrast .accessibility-shortcuts a:focus-visible {
+  outline-color: #ffff00;
+}
+
+.high-contrast .accessibility-controls button:disabled {
+  opacity: 0.65;
+}
+
+/* Telas médias */
+@media (max-width: 900px) {
+  .accessibility-bar {
+    align-items: flex-start;
+  }
+
+  .accessibility-shortcuts,
+  .accessibility-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+  .accessibility-bar {
+    padding: 12px 5%;
+    gap: 12px;
+  }
+
+  .accessibility-shortcuts {
+    gap: 8px 16px;
+  }
+
+  .accessibility-controls {
+    gap: 8px 12px;
+  }
+
+  .accessibility-shortcuts a {
+    min-height: 40px;
+  }
+
+  .accessibility-controls button {
+    min-height: 40px;
+  }
+}
+
+/* Respeita a preferência por movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  .accessibility-controls button,
+  .accessibility-shortcuts a {
+    transition: none;
+    scroll-behavior: auto;
+  }
+}
