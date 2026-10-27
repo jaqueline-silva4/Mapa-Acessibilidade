@@ -1,29 +1,43 @@
-import { Outlet } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+
+import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import AccessibilityBar from '../components/AccessibilityBar'
 
 function MainLayout() {
-    return (
-        <div className="app-layout">
-            <a className="skip-link" href="#conteudo-principal">
-                Pular para o conteúdo principal
-            </a>
+  const [highContrast, setHighContrast] = useState(false)
+  const [fontScale, setFontScale] = useState(1)
 
-            <Header />
+  return (
+    <div
+      className={`app-layout ${highContrast ? 'high-contrast' : ''}`}
+      style={{ fontSize: `${fontScale * 100}%` }}
+    >
+      <a className="skip-link" href="#conteudo-principal">
+        Pular para o conteúdo principal
+      </a>
 
-            <main
-                id="conteudo-principal"
-                tabIndex={-1}
-                className="main-contenct"
-            >
-                <Outlet />
+      <AccessibilityBar
+        highContrast={highContrast}
+        setHighContrast={setHighContrast}
+        fontScale={fontScale}
+        setFontScale={setFontScale}
+      />
 
-            </main>
+      <Header />
 
-            <Footer />
+      <main
+        id="conteudo-principal"
+        tabIndex={-1}
+        className="main-content"
+      >
+        <Outlet />
+      </main>
 
-        </div>
-    )
+      <Footer />
+    </div>
+  )
 }
 
 export default MainLayout

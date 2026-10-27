@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-brand">
           <a className="footer-brand-name" href="#inicio" aria-label="Acessa+ - Início">
-            <img className="accessibility-icon" src="/cadeira-de-rodas.png" alt="" aria-hidden="true" />
+            <img className="accessibility-icon" src="/favicon.png" alt="" aria-hidden="true" />
             <span>Acessa+</span>
           </a>
 

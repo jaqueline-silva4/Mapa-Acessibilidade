@@ -13,33 +13,33 @@
   padding: 48px 7%;
 }
 
-
 .footer-brand-name {
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 8px;
+  width: fit-content;
   color: #ffffff;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 800;
+  line-height: 1.2;
   text-decoration: none;
 }
 
-
 .accessibility-icon {
   display: block;
-  width: 26px;
-  height: 26px;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
   filter: brightness(0) invert(1);
 }
-
 
 .footer-brand-name:focus-visible {
   outline: 3px solid #8dccff;
   outline-offset: 4px;
 }
-
 
 .footer-brand p,
 .footer-contact p {
@@ -73,12 +73,15 @@
 
 .footer-links a:hover {
   color: #8dccff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .footer-links a:focus-visible,
 .footer-brand a:focus-visible {
   outline: 3px solid #8dccff;
   outline-offset: 4px;
+  border-radius: 2px;
 }
 
 .footer-bottom {

@@ -34,3 +34,69 @@ select {
 a {
   color: inherit;
 }
+
+
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1000;
+  padding: 12px 16px;
+  background-color: #ffffff;
+  color: #071d33;
+  border: 2px solid #0875d1;
+  border-radius: 6px;
+  text-decoration: none;
+  transform: translateY(-150%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.main-content:focus {
+  outline: none;
+}
+
+
+/* Modo de alto contraste */
+.high-contrast {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.high-contrast .header,
+.high-contrast .footer,
+.high-contrast .accessibility-bar {
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.high-contrast .main-content {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.high-contrast a {
+  color: #ffff00;
+}
+
+.high-contrast button {
+  border-color: #ffffff;
+}
+
+.high-contrast p,
+.high-contrast h1,
+.high-contrast h2,
+.high-contrast h3,
+.high-contrast li,
+.high-contrast label {
+  color: #ffffff;
+}
+
+.high-contrast a:focus-visible,
+.high-contrast button:focus-visible {
+  outline: 3px solid #ffff00;
+  outline-offset: 4px;
+}

@@ -1,4 +1,3 @@
-
 .navbar {
   display: flex;
   align-items: center;
@@ -20,6 +19,7 @@
   color: #17345c;
   font-size: 16px;
   font-weight: 500;
+  line-height: 1.5;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -38,7 +38,6 @@
   transition: transform 0.2s ease;
 }
 
-/* Item selecionado */
 .navbar-list a.active {
   color: #071d33;
   font-weight: 700;
@@ -48,7 +47,6 @@
   transform: scaleX(1);
 }
 
-/* Efeito ao passar o mouse */
 .navbar-list a:hover {
   color: #071d33;
 }
@@ -57,11 +55,17 @@
   transform: scaleX(1);
 }
 
-/* Acessibilidade pelo teclado */
 .navbar-list a:focus-visible {
   outline: 3px solid #0875d1;
   outline-offset: 4px;
   border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-list a,
+  .navbar-list a::after {
+    transition: none;
+  }
 }
 
 @media (max-width: 768px) {
