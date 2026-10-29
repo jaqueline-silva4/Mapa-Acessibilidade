@@ -24,9 +24,21 @@ function MainLayout() {
     <div
       className={`app-layout ${highContrast ? 'high-contrast' : ''}`}
     >
-      <a className="skip-link" href="#conteudo-principal">
-        Pular para o conteúdo principal
-      </a>
+      
+   <a
+      className="skip-link"
+      href="#conteudo-principal"
+      onClick={() => {
+        requestAnimationFrame(() => {
+          document
+            .getElementById('conteudo-principal')
+            ?.focus()
+        })
+      }}
+    >
+      Pular para o conteúdo principal
+    </a>
+
 
       <AccessibilityBar
         highContrast={highContrast}

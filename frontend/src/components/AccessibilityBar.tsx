@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react'
 import './AccessibilityBar.css'
 
@@ -92,9 +91,9 @@ export default function AccessibilityBar({
       </nav>
 
       <div className="accessibility-controls">
-        <span className="accessibility-bar-title">
+        <h2 className="accessibility-bar-title">
           Acessibilidade
-        </span>
+        </h2>
 
         <div
           className="text-controls"

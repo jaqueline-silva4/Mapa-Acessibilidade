@@ -53,7 +53,7 @@
 .hero-eyebrow {
   display: block;
   margin-bottom: 18px;
-  color: #087dcc;
+  color: #005A9C;
   font-family: inherit;
   font-size: 1rem;
   font-weight: 700;
@@ -71,7 +71,7 @@
 .hero-content p {
   max-width: 620px;
   margin: 0 0 28px;
-  color: #087dcc;
+  color: #005A9C;
   font-size: 1.25rem;
   line-height: 1.65;
 }
@@ -177,7 +177,7 @@
 
   .hero-content h1 {
     max-width: 100%;
-    font-size: clamp(2rem, 8vw, 2.625rem);
+    font-size: clamp(1.5rem, 8vw, 2rem);
     line-height: 1.2;
     letter-spacing: -0.8px;
     overflow-wrap: break-word;
