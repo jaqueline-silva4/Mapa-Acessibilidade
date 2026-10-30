@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import './AccessibilityBar.css'
+import { Link } from 'react-router-dom'
 
 interface AccessibilityBarProps {
   highContrast: boolean
@@ -91,10 +92,9 @@ export default function AccessibilityBar({
       </nav>
 
       <div className="accessibility-controls">
-        <h2 className="accessibility-bar-title">
-          Acessibilidade
-        </h2>
-
+        <Link to="/acessibilidade" className="accessibility-bar-title">
+            Acessibilidade
+        </Link>
         <div
           className="text-controls"
           role="group"

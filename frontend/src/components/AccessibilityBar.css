@@ -42,10 +42,22 @@
 }
 
 .accessibility-bar-title {
-  margin: 0;
-  font-size: inherit;
-  font-weight: 700;
-  white-space: nowrap;
+  text-decoration: none;
+  color: inherit;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.accessibility-bar-title:hover{
+  background-color: #ffffff;
+  color: #071d33;
+  text-decoration: none;
+}
+
+.accessibility-bar-title:focus-visible {
+  outline: 3px solid #8dccff;
+  outline-offset: 4px;
 }
 
 .text-controls {

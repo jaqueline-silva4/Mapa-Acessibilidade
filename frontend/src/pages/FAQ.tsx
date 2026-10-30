@@ -152,9 +152,9 @@ function FAQ() {
     </a>
 
     <main id="conteudo-principal" tabIndex={-1}>
-        <section className="hero" id="inicio">
-          <div className="hero-content">
-            <span className="hero-eyebrow">
+        <section className="faq-hero" id="inicio">
+          <div className="faq-hero-content">
+            <span className="faq-hero-eyebrow">
               PERGUNTAS MAIS FREQUENTES
             </span>
 
@@ -167,7 +167,7 @@ function FAQ() {
             </p>
           </div>
 
-          <div className="hero-image">
+          <div className="faq-hero-image">
             <img
               src='/ilustracao-acessibilidade.png' 
               alt='Pessoas com deficiência, incluindo uma pessoa usando cadeira de rodas, uma pessoa com deficiência visual acompanhada de um cão-guia e uma pessoa com prótese'> 

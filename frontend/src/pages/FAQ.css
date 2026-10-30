@@ -25,7 +25,7 @@
   flex: 1;
 }
 
-.hero {
+.faq-hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -43,14 +43,14 @@
   color: #071d33;
 }
 
-.hero-content {
+.faq-hero-content {
   width: 100%;
   max-width: 580px;
   justify-self: center;
   padding-left: 30px;
 }
 
-.hero-eyebrow {
+.faq-hero-eyebrow {
   display: block;
   margin-bottom: 18px;
   color: #087dcc;
@@ -60,7 +60,7 @@
   letter-spacing: 0.7px;
 }
 
-.hero-content h1 {
+.faq-hero-content h1 {
   margin: 0 0 22px;
   font-size: clamp(2.625rem, 3vw, 4.25rem);
   font-weight: 750;
@@ -68,7 +68,7 @@
   letter-spacing: -1.5px;
 }
 
-.hero-content p {
+.faq-hero-content p {
   max-width: 620px;
   margin: 0 0 28px;
   color: #087dcc;
@@ -76,7 +76,7 @@
   line-height: 1.65;
 }
 
-.hero-image {
+.faq-hero-image {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,7 +84,7 @@
   min-width: 0;
 }
 
-.hero-image img {
+.faq-hero-image img {
   display: block;
   width: 100%;
   max-width: 500px;
@@ -355,6 +355,45 @@
     padding: 24px 16px;
   }
 
+  .faq-hero {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  min-height: auto;
+  padding: 36px 20px;
+  }
+
+  .faq-hero-content {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+  }
+
+  .faq-hero-content h1 {
+    max-width: 100%;
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+    overflow-wrap: break-word;
+  }
+
+  .faq-hero-content p {
+    max-width: 100%;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+  }
+
+  .faq-hero-image {
+    min-width: 0;
+  }
+
+  .faq-hero-image img {
+    width: 100%;
+    max-width: 280px;
+    max-height: 200px;
+    height: auto;
+  }
+
   .faq-layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
@@ -366,7 +405,7 @@
 
   .faq-categorias {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 6px;
   }
 
@@ -378,7 +417,8 @@
   }
 
   .faq-categoria > span:nth-child(2) {
-    overflow-wrap: anywhere;
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 
   .faq-contador {

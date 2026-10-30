@@ -1,0 +1,414 @@
+
+/* ========================================
+   HERO - PÁGINA DE ACESSIBILIDADE
+======================================== */
+
+.accessibility-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 32px;
+  min-height: 400px;
+  padding: 40px 10%;
+  background: linear-gradient(
+    110deg,
+    #D1ECFF 0%,
+    #B6DFFD 25%,
+    #ADDBFB 50%,
+    #D1ECFF 75%,
+    #ECF7FF 100%
+  );
+  color: #071d33;
+}
+
+.accessibility-hero-content {
+  width: 100%;
+  max-width: 580px;
+  justify-self: center;
+  padding-left: 30px;
+}
+
+.accessibility-eyebrow {
+  display: block;
+  margin-bottom: 18px;
+  color: #005A9C;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+
+.accessibility-hero-content h1 {
+  margin: 0 0 22px;
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -1.5px;
+}
+
+.accessibility-hero-content p {
+  max-width: 620px;
+  margin: 0;
+  color: #005A9C;
+  font-size: 1.2rem;
+  line-height: 1.65;
+}
+
+.accessibility-hero-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.accessibility-hero-image img {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  max-height: 360px;
+  object-fit: contain;
+  object-position: center;
+}
+
+
+/* ========================================
+   RECURSOS DE ACESSIBILIDADE
+======================================== */
+
+.accessibility-features {
+  width: 100%;
+  padding: 24px 5.2% 40px;
+  background-color: #f3f7fa;
+  color: #071d33;
+}
+
+.accessibility-features-container {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.accessibility-features-container h2 {
+  margin: 0 0 20px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.accessibility-features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 20px;
+}
+
+.accessibility-feature-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+  padding: 16px 20px;
+  background-color: #ffffff;
+  border: 1px solid #cbddea;
+  border-radius: 28px;
+}
+
+.accessibility-feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #d1ecff;
+  color: #0086d6;
+}
+
+.accessibility-feature-content {
+  min-width: 0;
+}
+
+.accessibility-feature-content h3 {
+  margin: 2px 0 6px;
+  color: #071d33;
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.accessibility-feature-content p {
+  margin: 0;
+  color: #405b78;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+
+/* ========================================
+   COMO USAR OS ATALHOS
+======================================== */
+
+.accessibility-shortcuts-info {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 5.2% 32px;
+  color: #071d33;
+}
+
+.accessibility-shortcuts-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 30px;
+  background-color: #ffffff;
+  border: 1px solid #cbddea;
+  border-radius: 28px;
+}
+
+.accessibility-shortcuts-list h2 {
+  margin: 0 0 16px;
+  font-size: 1.35rem;
+}
+
+.accessibility-shortcuts-list p {
+  margin: 0 0 8px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.accessibility-shortcuts-note {
+  margin-top: 16px !important;
+  color: #526b83;
+}
+
+.accessibility-shortcuts-tip {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  border-radius: 26px;
+  background-color: #d1ecff;
+  color: #0079c8;
+}
+
+.accessibility-shortcuts-tip h3 {
+  margin: 0;
+  color: #071d33;
+  font-size: 1.2rem;
+}
+
+.accessibility-shortcuts-tip p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+
+/* ========================================
+   CHAMADA PARA CONTATO
+======================================== */
+
+.accessibility-contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: calc(100% - 10.4%);
+  max-width: 1500px;
+  margin: 0 auto 30px;
+  padding: 24px 30px;
+  border-radius: 28px;
+  background-color: #071d33;
+  color: #ffffff;
+}
+
+.accessibility-contact-content h2 {
+  margin: 0 0 5px;
+  font-size: 1.35rem;
+}
+
+.accessibility-contact-content p {
+  margin: 0;
+  color: #c4d1dc;
+  font-size: 0.95rem;
+}
+
+.accessibility-contact-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.accessibility-contact-link:hover {
+  text-decoration: underline;
+}
+
+.accessibility-contact-link:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 5px;
+  border-radius: 4px;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE - TABLETS
+======================================== */
+
+@media (max-width: 900px) {
+  .accessibility-hero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 48px 6%;
+  }
+
+  .accessibility-hero-image img {
+    max-width: 460px;
+    max-height: 340px;
+  }
+
+  .accessibility-features {
+    padding: 24px 5% 36px;
+  }
+
+  .accessibility-feature-card {
+    padding: 15px;
+    gap: 12px;
+  }
+
+  .accessibility-shortcuts-info {
+    padding-bottom: 32px;
+  }
+
+  .accessibility-shortcuts-content {
+    gap: 18px;
+    padding: 22px;
+  }
+
+  .accessibility-shortcuts-tip {
+    padding: 20px;
+  }
+
+  .accessibility-contact {
+    padding: 22px;
+  }
+}
+
+
+/* ========================================
+   RESPONSIVIDADE - CELULARES
+======================================== */
+
+@media (max-width: 650px) {
+  /* Hero */
+
+  .accessibility-hero {
+    min-height: auto;
+    padding: 40px 20px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .accessibility-hero-content {
+    min-width: 0;
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .accessibility-hero-content h1 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+    letter-spacing: -0.8px;
+    overflow-wrap: break-word;
+  }
+
+  .accessibility-hero-content p {
+    font-size: 1.0625rem;
+  }
+
+  .accessibility-hero-image img {
+    width: 100%;
+    max-width: 100%;
+    max-height: 300px;
+    height: auto;
+  }
+
+  /* Recursos */
+
+  .accessibility-features {
+    padding: 26px 20px 36px;
+  }
+
+  .accessibility-features-container h2 {
+    font-size: 1.35rem;
+  }
+
+  .accessibility-features-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .accessibility-feature-card {
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .accessibility-feature-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .accessibility-feature-content h3 {
+    font-size: 0.95rem;
+  }
+
+  .accessibility-feature-content p {
+    font-size: 0.875rem;
+  }
+
+  /* Atalhos */
+
+  .accessibility-shortcuts-info {
+    padding: 0 20px 24px;
+  }
+
+  .accessibility-shortcuts-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .accessibility-shortcuts-list h2 {
+    font-size: 1.2rem;
+  }
+
+  .accessibility-shortcuts-tip {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  /* Contato */
+
+  .accessibility-contact {
+    flex-direction: column;
+    align-items: flex-start;
+    width: calc(100% - 40px);
+    gap: 16px;
+    padding: 22px 20px;
+    border-radius: 22px;
+  }
+
+  .accessibility-contact-content h2 {
+    font-size: 1.15rem;
+  }
+
+  .accessibility-contact-content p {
+    font-size: 0.9rem;
+  }
+}
