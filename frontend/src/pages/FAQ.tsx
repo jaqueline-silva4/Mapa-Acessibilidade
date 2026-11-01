@@ -150,32 +150,29 @@ function FAQ() {
     <a className="skip-link" href="#conteudo-principal">
       Pular para o conteúdo principal
     </a>
+    
+        <section className="faq-destaque" aria-labelledby="faq-titulo">
+        <div className="faq-destaque-layout">
+          <div className="faq-destaque-conteudo">
+            <span className="faq-destaque-rotulo">PERGUNTAS MAIS FREQUENTES</span>
 
-    <main id="conteudo-principal" tabIndex={-1}>
-        <section className="hero" id="inicio">
-          <div className="hero-content">
-            <span className="hero-eyebrow">
-              PERGUNTAS MAIS FREQUENTES
-            </span>
-
-            <h1>
-              Como podemos te ajudar?
-            </h1>
+            <h1 id="faq-titulo">Como podemos te ajudar?</h1>
 
             <p>
               Respostas para dúvidas sobre o sistema, cadastro, instituições e muito mais.
             </p>
           </div>
 
-          <div className="hero-image">
+          <div className="faq-destaque-imagem">
             <img
-              src='/ilustracao-acessibilidade.png' 
-              alt='Pessoas com deficiência, incluindo uma pessoa usando cadeira de rodas, uma pessoa com deficiência visual acompanhada de um cão-guia e uma pessoa com prótese'> 
-            </img>
-
+              src="/ilustracao-acessibilidade.png"
+              alt="Pessoas com deficiência, incluindo uma pessoa usando cadeira de rodas, uma pessoa com deficiência visual acompanhada de um cão-guia e uma pessoa com prótese"
+            />
           </div>
-        </section>
-            
+        </div>
+      </section>
+
+      <main id="conteudo-principal">
         <section className="faq-pagina" aria-labelledby="faq-titulo">
         <div className="faq-layout">
             <aside className="faq-sidebar" aria-label="Categorias de perguntas">
