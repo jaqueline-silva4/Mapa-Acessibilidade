@@ -8,6 +8,7 @@ import Mapa from './pages/Mapa'
 import Sobre from './pages/Sobre'
 import FAQ from './pages/FAQ'
 import Login from './pages/Login'
+import Contato from './pages/Contato'
 
 import './App.css'
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/contato" element={<Contato />} />
         </Route>
       </Routes>
     </BrowserRouter>
