@@ -37,6 +37,8 @@ model User {
 
   passwordResetTokens PasswordResetToken[]
   accessibilityPoints AccessibilityPoint[]
+
+  institution Institution?
 }
 
 model PasswordResetToken {
@@ -93,4 +95,28 @@ model AccessibilityImage {
   point AccessibilityPoint @relation(fields: [pointId], references: [id], onDelete: Cascade)
 
   @@index([pointId])
+}
+
+
+model Institution {
+  id          Int      @id @default(autoincrement())
+  name        String
+  cnpj        String   @unique
+  phone       String
+  email       String
+  description String   @db.Text
+  street      String
+  number      String
+  neighborhood String
+  city        String
+  state       String
+  zipCode     String
+  latitude    Float
+  longitude   Float
+  active      Boolean  @default(true)
+  userId      Int      @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
 }
