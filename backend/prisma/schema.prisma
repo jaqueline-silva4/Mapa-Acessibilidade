@@ -39,6 +39,7 @@ model User {
   accessibilityPoints AccessibilityPoint[]
 
   institution Institution?
+  auditLogs AuditLog[]
 }
 
 model PasswordResetToken {
@@ -119,4 +120,75 @@ model Institution {
   updatedAt   DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  reviews Review[]
+}
+
+model Review {
+  id            Int         @id @default(autoincrement())
+  institutionId Int
+  authorName    String
+  authorEmail   String
+  rating        Int
+  comment       String      @db.Text
+  active        Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+
+  institution Institution @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+
+  @@index([institutionId, active, createdAt])
+  @@index([institutionId, active, rating])
+}
+
+model ContactMessage {
+  id        Int                   @id @default(autoincrement())
+  reason    ContactMessage_reason
+  name      String
+  email     String
+  phone     String?
+  message   String                @db.Text
+  status    ContactMessage_status @default(PENDING)
+  createdAt DateTime              @default(now())
+
+  @@index([status, createdAt])
+}
+
+model FAQItem {
+  id       Int              @id @default(autoincrement())
+  category FAQItem_category
+  question String
+  answer   String           @db.Text
+
+  @@index([category])
+}
+
+model AuditLog {
+  id           Int      @id @default(autoincrement())
+  adminId      Int
+  action       String
+  targetEntity String
+  targetId     Int
+  details      String?  @db.Text
+  createdAt    DateTime @default(now())
+
+  admin User @relation(fields: [adminId], references: [id])
+
+  @@index([adminId, createdAt])
+  @@index([targetEntity, targetId])
+}
+
+enum FAQItem_category {
+  MAP
+  SCREEN_READERS
+  LIBRAS
+  GENERAL
+}
+
+enum ContactMessage_reason {
+  QUESTION
+  REGISTRATION_REQUEST
+}
+
+enum ContactMessage_status {
+  PENDING
+  ANSWERED
 }
