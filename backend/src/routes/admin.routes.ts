@@ -17,6 +17,8 @@ import {
 } from "../modules/institutions/institutions.schemas.js";
 
 import * as institutionService from "../modules/institutions/institutions.service.js";
+import { moderateReview } from "../modules/reviews/reviews.service.js";
+import { listContactMessages } from "../modules/contact/contact.service.js";
 
 const paramsSchema = z.object({
   id: z.coerce.number().int().positive(),
@@ -155,6 +157,39 @@ adminRouter.patch("/institutions/:id/status", async (req, res) => {
     );
 
     res.json(institution);
+  } catch (error) {
+    sendError(res, error);
+  }
+});
+
+// Desativar avaliação por moderação administrativa
+adminRouter.delete("/reviews/:id", async (req, res) => {
+  const params = paramsSchema.safeParse(req.params);
+
+  if (!params.success) {
+    res.status(400).json({
+      message: "Informe um id válido para a avaliação.",
+    });
+    return;
+  }
+
+  try {
+    const result = await moderateReview(
+      params.data.id,
+      Number(req.user!.sub),
+    );
+
+    res.json(result);
+  } catch (error) {
+    sendError(res, error);
+  }
+});
+
+// Listar mensagens de contato
+adminRouter.get("/contacts", async (_req, res) => {
+  try {
+    const contacts = await listContactMessages();
+    res.json(contacts);
   } catch (error) {
     sendError(res, error);
   }
