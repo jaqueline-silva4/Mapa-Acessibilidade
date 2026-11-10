@@ -1,4 +1,3 @@
-
 import Navbar from './Navbar'
 import './Header.css'
 
@@ -13,7 +12,7 @@ const Header = () => {
         <img
           className="header-logo"
           src="/logo-acessa.png"
-          alt="Acessa+"
+          alt=""
         />
       </a>
 

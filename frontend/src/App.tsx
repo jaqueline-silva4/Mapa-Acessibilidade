@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import MainLayout from './layouts/MainLayout'
@@ -8,6 +9,7 @@ import Mapa from './pages/Mapa'
 import Sobre from './pages/Sobre'
 import FAQ from './pages/FAQ'
 import Login from './pages/Login'
+import Acessibilidade from './pages/Acessibilidade'
 import Contato from './pages/Contato'
 
 import './App.css'
@@ -23,6 +25,7 @@ function App() {
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/acessibilidade" element={<Acessibilidade />} />
           <Route path="/contato" element={<Contato />} />
         </Route>
       </Routes>

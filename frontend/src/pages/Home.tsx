@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
@@ -22,7 +23,10 @@ const ATRASO_BUSCA_MS = 300
 
 function resumir(texto: string, limite = 120): string {
   const limpo = texto.trim()
-  return limpo.length > limite ? `${limpo.slice(0, limite).trimEnd()}…` : limpo
+
+  return limpo.length > limite
+    ? `${limpo.slice(0, limite).trimEnd()}…`
+    : limpo
 }
 
 function Home() {
@@ -39,6 +43,7 @@ function Home() {
       () => setTermo(busca.trim()),
       ATRASO_BUSCA_MS
     )
+
     return () => window.clearTimeout(temporizador)
   }, [busca])
 
@@ -55,6 +60,7 @@ function Home() {
         if (!resposta.ok) {
           throw new Error(`Falha na busca (${resposta.status})`)
         }
+
         return resposta.json() as Promise<InstituicaoBusca[]>
       })
       .then((dados) => {
@@ -62,7 +68,10 @@ function Home() {
         setEstado('pronto')
       })
       .catch((erro: unknown) => {
-        if (erro instanceof DOMException && erro.name === 'AbortError') return
+        if (erro instanceof DOMException && erro.name === 'AbortError') {
+          return
+        }
+
         setEstado('erro')
       })
 
@@ -96,9 +105,15 @@ function Home() {
 
   return (
     <>
-      <section className="hero" id="inicio" aria-labelledby="hero-titulo">
+      <section
+        className="hero"
+        id="inicio"
+        aria-labelledby="hero-titulo"
+      >
         <div className="hero-content">
-          <span className="hero-eyebrow">PLATAFORMA DE ACESSIBILIDADE</span>
+          <span className="hero-eyebrow">
+            PLATAFORMA DE ACESSIBILIDADE
+          </span>
 
           <h1 id="hero-titulo">
             Acessibilidade
@@ -112,7 +127,10 @@ function Home() {
           </p>
 
           <div className="hero-actions">
-            <a className="button button-primary" href="#busca-instituicao">
+            <a
+              className="button button-primary"
+              href="#busca-instituicao"
+            >
               <img
                 className="search-icon"
                 src="/lupa.png"
@@ -143,14 +161,25 @@ function Home() {
         aria-labelledby="home-busca-titulo"
       >
         <div className="home-busca-container">
-          <h2 id="home-busca-titulo">Busque uma instituição</h2>
+          <h2 id="home-busca-titulo">
+            Busque uma instituição
+          </h2>
+
           <p className="home-busca-texto">
             Digite o nome ou a cidade para ver as instituições e os recursos de
             acessibilidade que elas oferecem.
           </p>
 
-          <form className="home-busca-form" role="search" onSubmit={aoEnviar} noValidate>
-            <label htmlFor="home-busca-campo" className="home-busca-rotulo">
+          <form
+            className="home-busca-form"
+            role="search"
+            onSubmit={aoEnviar}
+            noValidate
+          >
+            <label
+              htmlFor="home-busca-campo"
+              className="home-busca-rotulo"
+            >
               Nome ou cidade da instituição
             </label>
 
@@ -179,15 +208,25 @@ function Home() {
             </div>
 
             {avisoCampoVazio && (
-              <p id="home-busca-aviso" className="home-busca-aviso" role="alert">
+              <p
+                id="home-busca-aviso"
+                className="home-busca-aviso"
+                role="alert"
+              >
                 Informe o nome da instituição que deseja encontrar.
               </p>
             )}
           </form>
 
-          <div className="home-busca-resultados" aria-live="polite">
+          <div
+            className="home-busca-resultados"
+            aria-live="polite"
+          >
             {estado === 'carregando' && (
-              <ul className="home-busca-lista" aria-label="Carregando resultados">
+              <ul
+                className="home-busca-lista"
+                aria-label="Carregando resultados"
+              >
                 {[0, 1, 2].map((item) => (
                   <li
                     key={item}
@@ -205,8 +244,12 @@ function Home() {
             )}
 
             {estado === 'erro' && (
-              <div className="home-busca-status home-busca-erro" role="alert">
+              <div
+                className="home-busca-status home-busca-erro"
+                role="alert"
+              >
                 <p>Não foi possível buscar as instituições agora.</p>
+
                 <button
                   type="button"
                   className="button button-secondary"
@@ -234,21 +277,29 @@ function Home() {
                     : `${resultados.length} instituições encontradas`}
                 </p>
 
-                <ul className="home-busca-lista" aria-label="Instituições encontradas">
+                <ul
+                  className="home-busca-lista"
+                  aria-label="Instituições encontradas"
+                >
                   {resultados.map((instituicao) => (
                     <li key={instituicao.id}>
                       <article className="home-cartao">
                         <Building2 aria-hidden="true" size={22} />
+
                         <h3>{instituicao.name}</h3>
+
                         <p className="home-cartao-local">
                           <MapPin aria-hidden="true" size={14} />
+
                           <span>
                             {instituicao.street}, {instituicao.number} -{' '}
                             {instituicao.neighborhood}, {instituicao.city} -{' '}
                             {instituicao.state}
                           </span>
                         </p>
+
                         <p>{resumir(instituicao.description)}</p>
+
                         <Link
                           className="button button-primary"
                           to={`/instituicao/${instituicao.id}`}

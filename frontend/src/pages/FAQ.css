@@ -1,3 +1,4 @@
+
 #root {
   min-height: 100vh;
   display: flex;
@@ -25,6 +26,8 @@
 #conteudo-principal {
   flex: 1;
 }
+
+/* Destaque principal */
 
 .faq-destaque {
   padding: 48px 0;
@@ -133,7 +136,7 @@
   border-radius: 24px;
 }
 
-.faq-sidebar > h1 {
+.faq-sidebar > h2 {
   margin: 0 0 14px;
   color: #071d33;
   font-size: 1.25rem;
@@ -195,6 +198,7 @@
   font-weight: 700;
 }
 
+/* Área de suporte */
 
 .faq-suporte {
   margin-top: 18px;
@@ -250,9 +254,7 @@
   color: #071d33;
 }
 
-/* ========================================
-   PERGUNTAS E RESPOSTAS
-   ======================================== */
+/* Perguntas e respostas */
 
 .faq-lista {
   display: flex;
@@ -395,6 +397,45 @@
     max-height: 230px;
   }
 
+  .faq-destaque {
+    padding: 36px 0;
+  }
+
+  .faq-destaque-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .faq-destaque-conteudo {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .faq-destaque-conteudo h1 {
+    max-width: 100%;
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+    overflow-wrap: break-word;
+  }
+
+  .faq-destaque-conteudo p {
+    max-width: 100%;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+  }
+
+  .faq-destaque-imagem {
+    min-width: 0;
+  }
+
+  .faq-destaque-imagem img {
+    width: 100%;
+    max-width: 280px;
+    max-height: 200px;
+    height: auto;
+  }
+
   .faq-pagina {
     padding: 28px 0 48px;
   }
@@ -411,7 +452,7 @@
 
   .faq-categorias {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 6px;
   }
 
@@ -420,6 +461,11 @@
     min-width: 0;
     padding: 8px;
     font-size: 0.8125rem;
+  }
+
+  .faq-categoria > span:nth-child(2) {
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 
   .faq-contador {
@@ -453,9 +499,7 @@
   }
 }
 
-/* ========================================
-   MOVIMENTOS REDUZIDOS
-   ======================================== */
+/* Movimentos reduzidos */
 
 @media (prefers-reduced-motion: reduce) {
   .faq-categoria,
@@ -491,7 +535,7 @@
   color: #ffffff;
 }
 
-.high-contrast .faq-sidebar > h1,
+.high-contrast .faq-sidebar > h2,
 .high-contrast .faq-suporte h2,
 .high-contrast .faq-suporte p,
 .high-contrast .faq-resposta,
