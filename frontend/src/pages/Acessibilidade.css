@@ -1,8 +1,4 @@
-
-/* ========================================
-   HERO - PÁGINA DE ACESSIBILIDADE
-======================================== */
-
+/* HERO - PÁGINA DE ACESSIBILIDADE */
 .accessibility-hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -70,10 +66,7 @@
   object-position: center;
 }
 
-
-/* ========================================
-   RECURSOS DE ACESSIBILIDADE
-======================================== */
+/* RECURSOS DE ACESSIBILIDADE */
 
 .accessibility-features {
   width: 100%;
@@ -84,7 +77,7 @@
 
 .accessibility-features-container {
   width: 100%;
-  max-width: 1500px;
+  max-width: 1118px;
   margin: 0 auto;
 }
 
@@ -106,7 +99,7 @@
   align-items: flex-start;
   gap: 14px;
   min-width: 0;
-  padding: 16px 20px;
+  padding: 22px 20px;
   background-color: #ffffff;
   border: 1px solid #cbddea;
   border-radius: 28px;
@@ -143,17 +136,15 @@
   line-height: 1.5;
 }
 
-
-/* ========================================
-   COMO USAR OS ATALHOS
-======================================== */
+/*COMO USAR OS ATALHOS */
 
 .accessibility-shortcuts-info {
   width: 100%;
-  max-width: 1500px;
+  max-width: 1118px;
   margin: 0 auto;
-  padding: 0 5.2% 32px;
+  padding: 0 0 32px;
   color: #071d33;
+  box-sizing: border-box;
 }
 
 .accessibility-shortcuts-content {
@@ -205,20 +196,18 @@
   line-height: 1.5;
 }
 
-
-/* ========================================
-   CHAMADA PARA CONTATO
-======================================== */
+/* CHAMADA PARA CONTATO */
 
 .accessibility-contact {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  width: calc(100% - 10.4%);
-  max-width: 1500px;
+  width: 100%;
+  max-width: 1118px;
   margin: 0 auto 30px;
   padding: 24px 30px;
+  box-sizing: border-box;
   border-radius: 28px;
   background-color: #071d33;
   color: #ffffff;
@@ -257,10 +246,7 @@
   border-radius: 4px;
 }
 
-
-/* ========================================
-   RESPONSIVIDADE - TABLETS
-======================================== */
+/* RESPONSIVIDADE - TABLETS */
 
 @media (max-width: 900px) {
   .accessibility-hero {
@@ -284,7 +270,9 @@
   }
 
   .accessibility-shortcuts-info {
-    padding-bottom: 32px;
+    width: 100%;
+    max-width: 100%;
+    padding-bottom: 0 5% 32px;
   }
 
   .accessibility-shortcuts-content {
@@ -297,18 +285,15 @@
   }
 
   .accessibility-contact {
+    width: 90%;
+    max-width: 100%;
     padding: 22px;
   }
 }
 
-
-/* ========================================
-   RESPONSIVIDADE - CELULARES
-======================================== */
+/* RESPONSIVIDADE - CELULARES */
 
 @media (max-width: 650px) {
-  /* Hero */
-
   .accessibility-hero {
     min-height: auto;
     padding: 40px 20px;
@@ -374,6 +359,8 @@
   /* Atalhos */
 
   .accessibility-shortcuts-info {
+    width: 100%;
+    max-width: 100%;
     padding: 0 20px 24px;
   }
 
@@ -399,6 +386,7 @@
     flex-direction: column;
     align-items: flex-start;
     width: calc(100% - 40px);
+    max-width: 100%;
     gap: 16px;
     padding: 22px 20px;
     border-radius: 22px;

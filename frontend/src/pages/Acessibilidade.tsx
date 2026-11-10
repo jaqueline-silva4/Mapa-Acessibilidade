@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 
 import './Acessibilidade.css'
+import {Link} from 'react-router-dom'
 
 const accessibilityFeatures = [
   {
@@ -154,13 +155,13 @@ function Acessibilidade() {
           <p>Fale conosco e conte o que podemos melhorar para você.</p>
         </div>
 
-        <a
-          href="mailto:contato@acessamais.com.br"
+        <Link
+          to="/contato"
           className="accessibility-contact-link"
         >
           <Mail size={20} aria-hidden="true" />
           Falar conosco
-        </a>
+        </Link>
       </section>
     </>
   )
