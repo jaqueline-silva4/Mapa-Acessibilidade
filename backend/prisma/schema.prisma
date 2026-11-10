@@ -36,6 +36,10 @@ model User {
   updatedAt           DateTime      @updatedAt
 
   passwordResetTokens PasswordResetToken[]
+  accessibilityPoints AccessibilityPoint[]
+
+  institution Institution?
+  auditLogs AuditLog[]
 }
 
 model PasswordResetToken {
@@ -49,4 +53,142 @@ model PasswordResetToken {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+// RN08: categorias fixas e padronizadas, criadas apenas via seed/admin.
+model AccessibilityCategory {
+  id     Int                  @id @default(autoincrement())
+  name   String               @unique
+  icon   String
+  points AccessibilityPoint[]
+}
+
+model AccessibilityPoint {
+  id            Int      @id @default(autoincrement())
+  // Id do User com role INSTITUTION dono do ponto (RN09).
+  institutionId Int
+  categoryId    Int
+  title         String
+  description   String   @db.Text
+  // RN12: só aparece ao público depois de ativado pela própria instituição.
+  active        Boolean  @default(false)
+  // RN13: contador de denúncias (>= 3 => "em verificação" na página pública).
+  reportCount   Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  institution User                  @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+  category    AccessibilityCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  images      AccessibilityImage[]
+
+  // Atende o filtro por checklist (RNF20: resposta em até 3 s).
+  @@index([institutionId, active, categoryId])
+  @@index([categoryId])
+}
+
+model AccessibilityImage {
+  id        Int      @id @default(autoincrement())
+  pointId   Int
+  imageUrl  String
+  altText   String // RN10: obrigatório (validado também na API)
+  createdAt DateTime @default(now())
+
+  point AccessibilityPoint @relation(fields: [pointId], references: [id], onDelete: Cascade)
+
+  @@index([pointId])
+}
+
+
+model Institution {
+  id          Int      @id @default(autoincrement())
+  name        String
+  cnpj        String   @unique
+  phone       String
+  email       String
+  description String   @db.Text
+  street      String
+  number      String
+  neighborhood String
+  city        String
+  state       String
+  zipCode     String
+  latitude    Float
+  longitude   Float
+  active      Boolean  @default(true)
+  userId      Int      @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  reviews Review[]
+}
+
+model Review {
+  id            Int         @id @default(autoincrement())
+  institutionId Int
+  authorName    String
+  authorEmail   String
+  rating        Int
+  comment       String      @db.Text
+  active        Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+
+  institution Institution @relation(fields: [institutionId], references: [id], onDelete: Cascade)
+
+  @@index([institutionId, active, createdAt])
+  @@index([institutionId, active, rating])
+}
+
+model ContactMessage {
+  id        Int                   @id @default(autoincrement())
+  reason    ContactMessage_reason
+  name      String
+  email     String
+  phone     String?
+  message   String                @db.Text
+  status    ContactMessage_status @default(PENDING)
+  createdAt DateTime              @default(now())
+
+  @@index([status, createdAt])
+}
+
+model FAQItem {
+  id       Int              @id @default(autoincrement())
+  category FAQItem_category
+  question String
+  answer   String           @db.Text
+
+  @@index([category])
+}
+
+model AuditLog {
+  id           Int      @id @default(autoincrement())
+  adminId      Int
+  action       String
+  targetEntity String
+  targetId     Int
+  details      String?  @db.Text
+  createdAt    DateTime @default(now())
+
+  admin User @relation(fields: [adminId], references: [id])
+
+  @@index([adminId, createdAt])
+  @@index([targetEntity, targetId])
+}
+
+enum FAQItem_category {
+  MAP
+  SCREEN_READERS
+  LIBRAS
+  GENERAL
+}
+
+enum ContactMessage_reason {
+  QUESTION
+  REGISTRATION_REQUEST
+}
+
+enum ContactMessage_status {
+  PENDING
+  ANSWERED
 }

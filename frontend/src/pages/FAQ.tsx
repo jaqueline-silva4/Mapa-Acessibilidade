@@ -1,3 +1,4 @@
+
 import "./FAQ.css";
 
 import { useState } from "react";
@@ -71,7 +72,7 @@ const perguntas: Pergunta[] = [
     categoria: "Instituições",
     pergunta: "Como cadastro minha instituição?",
     resposta:
-      "Entre em contato pelo botão Fale conosco e nossa equipe fará o cadastro. Essa medida é necessária para a a validação da instituição pela plataforma.",
+      "Entre em contato pelo botão Fale conosco e nossa equipe fará o cadastro. Essa medida é necessária para a validação da instituição pela plataforma.",
   },
   {
     id: 6,
@@ -100,7 +101,7 @@ const icones: Record<string, LucideIcon> = {
   cadastro: UserPlus,
   acessibilidade: Accessibility,
   suporte: Headphones,
-  email: Mail
+  email: Mail,
 };
 
 function Icone({ nome, tamanho = 18 }: IconeProps) {
@@ -147,139 +148,167 @@ function FAQ() {
 
   return (
     <>
-    <a className="skip-link" href="#conteudo-principal">
-      Pular para o conteúdo principal
-    </a>
+      <a className="skip-link" href="#conteudo-principal">
+        Pular para o conteúdo principal
+      </a>
 
-    <main id="conteudo-principal" tabIndex={-1}>
-        <section className="faq-hero" id="inicio">
-          <div className="faq-hero-content">
-            <span className="faq-hero-eyebrow">
+      <section className="faq-destaque" aria-labelledby="faq-titulo">
+        <div className="faq-destaque-layout">
+          <div className="faq-destaque-conteudo">
+            <span className="faq-destaque-rotulo">
               PERGUNTAS MAIS FREQUENTES
             </span>
 
-            <h1>
-              Como podemos te ajudar?
-            </h1>
+            <h1 id="faq-titulo">Como podemos te ajudar?</h1>
 
             <p>
-              Respostas para dúvidas sobre o sistema, cadastro, instituições e muito mais.
+              Respostas para dúvidas sobre o sistema, cadastro,
+              instituições e muito mais.
             </p>
           </div>
 
-          <div className="faq-hero-image">
+          <div className="faq-destaque-imagem">
             <img
-              src='/ilustracao-acessibilidade.png' 
-              alt='Pessoas com deficiência, incluindo uma pessoa usando cadeira de rodas, uma pessoa com deficiência visual acompanhada de um cão-guia e uma pessoa com prótese'> 
-            </img>
-
+              src="/ilustracao-acessibilidade.png"
+              alt="Pessoas com deficiência, incluindo uma pessoa usando cadeira de rodas, uma pessoa com deficiência visual acompanhada de um cão-guia e uma pessoa com prótese"
+            />
           </div>
-        </section>
-            
-        <section className="faq-pagina" aria-labelledby="faq-titulo">
-        <div className="faq-layout">
-            <aside className="faq-sidebar" aria-label="Categorias de perguntas">
-            <h1 id="faq-titulo">Categorias</h1>
+        </div>
+      </section>
 
-            <nav className="faq-categorias" aria-label="Filtrar perguntas">
+      <main id="conteudo-principal" tabIndex={-1}>
+        <section
+          className="faq-pagina"
+          aria-labelledby="faq-categorias-titulo"
+        >
+          <div className="faq-layout">
+            <aside
+              className="faq-sidebar"
+              aria-label="Categorias de perguntas"
+            >
+              <h2 id="faq-categorias-titulo">Categorias</h2>
+
+              <nav
+                className="faq-categorias"
+                aria-label="Filtrar perguntas"
+              >
                 <button
-                type="button"
-                className={`faq-categoria ${
+                  type="button"
+                  className={`faq-categoria ${
                     categoriaSelecionada === "Todas" ? "ativa" : ""
-                }`}
-                onClick={() => selecionarCategoria("Todas")}
-                aria-pressed={categoriaSelecionada === "Todas"}
+                  }`}
+                  onClick={() => selecionarCategoria("Todas")}
+                  aria-pressed={categoriaSelecionada === "Todas"}
                 >
-                <Icone nome="todas" />
-                <span>Todas</span>
-                <span className="faq-contador">
-                    {String(quantidadePorCategoria("Todas")).padStart(2, "0")}
-                </span>
+                  <Icone nome="todas" />
+                  <span>Todas</span>
+                  <span className="faq-contador">
+                    {String(
+                      quantidadePorCategoria("Todas"),
+                    ).padStart(2, "0")}
+                  </span>
                 </button>
 
                 {categorias.map((categoria) => (
-                <button
+                  <button
                     type="button"
                     key={categoria.nome}
                     className={`faq-categoria ${
-                    categoriaSelecionada === categoria.nome ? "ativa" : ""
+                      categoriaSelecionada === categoria.nome
+                        ? "ativa"
+                        : ""
                     }`}
-                    onClick={() => selecionarCategoria(categoria.nome)}
-                    aria-pressed={categoriaSelecionada === categoria.nome}
-                >
+                    onClick={() =>
+                      selecionarCategoria(categoria.nome)
+                    }
+                    aria-pressed={
+                      categoriaSelecionada === categoria.nome
+                    }
+                  >
                     <Icone nome={categoria.icone} />
-                    <span>{categoria.nome}</span>
-                    <span className="faq-contador">
-                    {String(
-                        quantidadePorCategoria(categoria.nome),
-                    ).padStart(2, "0")}
-                    </span>
-                </button>
-                ))}
-            </nav>
 
-            <div className="faq-suporte">
+                    <span>{categoria.nome}</span>
+
+                    <span className="faq-contador">
+                      {String(
+                        quantidadePorCategoria(categoria.nome),
+                      ).padStart(2, "0")}
+                    </span>
+                  </button>
+                ))}
+              </nav>
+
+              <div className="faq-suporte">
                 <span className="faq-suporte-icone">
-                <Icone nome="suporte" tamanho={24} />
+                  <Icone nome="suporte" tamanho={24} />
                 </span>
 
                 <h2>Ainda precisa de ajuda?</h2>
+
                 <p>Fale com o nosso suporte.</p>
 
                 <a className="faq-botao-suporte" href="/contato">
-                <Icone nome="email" />
-                <span>Fale conosco</span>
+                  <Icone nome="email" />
+                  <span>Fale conosco</span>
                 </a>
-            </div>
+              </div>
             </aside>
 
-            <div className="faq-lista" aria-label="Perguntas frequentes">
-            {perguntasFiltradas.map((item) => {
+            <div
+              className="faq-lista"
+              aria-label="Perguntas frequentes"
+            >
+              {perguntasFiltradas.map((item) => {
                 const aberta = perguntaAberta === item.id;
                 const respostaId = `faq-resposta-${item.id}`;
 
                 return (
-                <article
+                  <article
                     className={`faq-item ${aberta ? "aberta" : ""}`}
                     key={item.id}
-                >
+                  >
                     <h2 className="faq-pergunta-titulo">
-                        <button
-                            type="button"
-                            className={`faq-pergunta ${aberta ? "aberta" : ""}`}
-                            aria-expanded={aberta}
-                            aria-controls={respostaId}
-                            onClick={() => alternarPergunta(item.id)}
-                            >
-                            <span>{item.pergunta}</span>
+                      <button
+                        type="button"
+                        className={`faq-pergunta ${
+                          aberta ? "aberta" : ""
+                        }`}
+                        aria-expanded={aberta}
+                        aria-controls={respostaId}
+                        onClick={() => alternarPergunta(item.id)}
+                      >
+                        <span>{item.pergunta}</span>
 
-                            <ChevronDown
-                                size={18}
-                                strokeWidth={1.8}
-                                className="faq-seta"
-                                aria-hidden="true"
-                            />
-                        </button>
+                        <ChevronDown
+                          size={18}
+                          strokeWidth={1.8}
+                          className="faq-seta"
+                          aria-hidden="true"
+                        />
+                      </button>
                     </h2>
 
                     {aberta && (
-                    <div className="faq-resposta" id={respostaId}>
+                      <div
+                        className="faq-resposta"
+                        id={respostaId}
+                      >
                         <p>{item.resposta}</p>
-                    </div>
+                      </div>
                     )}
-                </article>
+                  </article>
                 );
-            })}
+              })}
 
-            {perguntasFiltradas.length === 0 && (
+              {perguntasFiltradas.length === 0 && (
                 <p className="faq-vazio">
-                Nenhuma pergunta encontrada nesta categoria.
+                  Nenhuma pergunta encontrada nesta categoria.
                 </p>
-            )}
+              )}
             </div>
-        </div>
+          </div>
         </section>
-    </main>
+      </main>
     </>
   );
 }

@@ -1,3 +1,4 @@
+
 {
   "name": "mapa-acessibilidade",
   "private": true,
@@ -10,12 +11,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "leaflet": "^1.9.4",
     "lucide-react": "^1.71.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.22",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",

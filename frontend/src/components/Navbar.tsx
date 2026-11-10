@@ -7,6 +7,7 @@ const links = [
   { label: 'Mapa', href: '/mapa' },
   { label: 'Sobre', href: '/sobre' },
   { label: 'FAQ', href: '/faq' },
+  { label: 'Fale Conosco', href: '/contato' },
 ]
 
 export default function Navbar() {

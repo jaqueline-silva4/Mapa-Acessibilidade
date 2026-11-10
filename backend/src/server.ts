@@ -5,6 +5,12 @@ import express from "express";
 import { prisma } from "./db/prisma.js";
 import { adminRouter } from "./routes/admin.routes.js";
 import { authRouter } from "./routes/auth.routes.js";
+import path from "node:path";
+import { categoriesRouter, institutionPointsRouter, publicPointsRouter } from "./modules/points/points.routes.js";
+import { publicInstitutionsRouter } from "./modules/institutions/institutions.routes.js";
+import { reviewsRouter } from "./modules/reviews/reviews.routes.js";
+import { faqRouter } from "./modules/faq/faq.routes.js";
+import { contactRouter } from "./modules/contact/contact.routes.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,7 +18,15 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
+app.use("/uploads", express.static(path.resolve(process.cwd(), "uploads")));
+app.use("/api/institution/points", institutionPointsRouter);
+app.use("/api/institutions", publicPointsRouter);
+app.use("/api/accessibility-categories", categoriesRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/institutions", publicInstitutionsRouter);
+app.use("/api/institutions", reviewsRouter);
+app.use("/api/faq", faqRouter);
+app.use("/api/contact", contactRouter);
 
 // Rota raiz inicial
 app.get("/", async (_req, res) => {
