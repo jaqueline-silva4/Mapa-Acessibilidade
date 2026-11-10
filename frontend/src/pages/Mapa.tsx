@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import L from 'leaflet'
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
-import { List, Map as MapIcon, MapPin } from 'lucide-react'
+import { List, Map as MapIcon, MapPin, Star } from 'lucide-react'
 import 'leaflet/dist/leaflet.css'
 
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
@@ -15,6 +15,13 @@ type InstituicaoMapa = {
   id: number
   name: string
   description: string
+  street: string
+  number: string
+  neighborhood: string
+  city: string
+  state: string
+  averageRating: number
+  reviewsCount: number
   latitude: number
   longitude: number
 }
@@ -44,6 +51,32 @@ function temLocalizacaoValida(instituicao: InstituicaoMapa): boolean {
     Number.isFinite(longitude) &&
     Math.abs(latitude) <= 90 &&
     Math.abs(longitude) <= 180
+  )
+}
+
+function formatarEndereco(instituicao: InstituicaoMapa): string {
+  const { street, number, neighborhood, city, state } = instituicao
+  return `${street}, ${number} - ${neighborhood}, ${city} - ${state}`
+}
+
+// Exibe a nota com vírgula, como no restante da plataforma.
+function Avaliacao({ instituicao }: { instituicao: InstituicaoMapa }) {
+  const { averageRating, reviewsCount } = instituicao
+
+  if (reviewsCount === 0) {
+    return <p className="mapa-nota">Ainda sem avaliações</p>
+  }
+
+  const nota = averageRating.toFixed(1).replace('.', ',')
+
+  return (
+    <p className="mapa-nota">
+      <Star aria-hidden="true" size={16} fill="currentColor" strokeWidth={0} />
+      <span>
+        Nota {nota} de 5 ({reviewsCount}{' '}
+        {reviewsCount === 1 ? 'avaliação' : 'avaliações'})
+      </span>
+    </p>
   )
 }
 
@@ -198,6 +231,8 @@ function Mapa() {
                   <Popup>
                     <div className="mapa-popup">
                       <h2>{instituicao.name}</h2>
+                      <p>{formatarEndereco(instituicao)}</p>
+                      <Avaliacao instituicao={instituicao} />
                       <p>{resumir(instituicao.description)}</p>
                       <Link
                         className="mapa-botao"
@@ -226,6 +261,8 @@ function Mapa() {
                 <MapPin aria-hidden="true" size={22} />
                 <div>
                   <h2>{instituicao.name}</h2>
+                  <p>{formatarEndereco(instituicao)}</p>
+                  <Avaliacao instituicao={instituicao} />
                   <p>{resumir(instituicao.description)}</p>
                   <Link
                     className="mapa-botao"

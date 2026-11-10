@@ -87,6 +87,20 @@
   line-height: 1.5;
 }
 
+/* Nota média */
+.mapa-page .mapa-nota {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 8px;
+  font-weight: 700;
+  color: #7a4b00;
+}
+
+.high-contrast .mapa-page .mapa-nota {
+  color: #ffff00;
+}
+
 /* Botão e link de ação */
 .mapa-botao {
   display: inline-flex;
