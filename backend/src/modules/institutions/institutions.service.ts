@@ -396,6 +396,11 @@ export async function listPublicInstitutionsMap() {
       id: true,
       name: true,
       description: true,
+      street: true,
+      number: true,
+      neighborhood: true,
+      city: true,
+      state: true,
       latitude: true,
       longitude: true,
     },
@@ -404,5 +409,34 @@ export async function listPublicInstitutionsMap() {
     },
   });
 
-  return institutions;
+  if (institutions.length === 0) {
+    return [];
+  }
+
+  // Calcula a média e o total das avaliações publicadas de cada instituição.
+  const ratings = await prisma.review.groupBy({
+    by: ["institutionId"],
+    where: {
+      active: true,
+      institutionId: { in: institutions.map((institution) => institution.id) },
+    },
+    _avg: { rating: true },
+    _count: { _all: true },
+  });
+
+  const ratingsByInstitution = new Map(
+    ratings.map((item) => [item.institutionId, item])
+  );
+
+  return institutions.map((institution) => {
+    const rating = ratingsByInstitution.get(institution.id);
+
+    return {
+      ...institution,
+      averageRating: rating?._avg.rating
+        ? Math.round(rating._avg.rating * 10) / 10
+        : 0,
+      reviewsCount: rating?._count._all ?? 0,
+    };
+  });
 }
