@@ -145,14 +145,19 @@ export async function listCategories() {
 }
 
 export async function listPublicPoints(institutionId: number, categoryIds: number[]) {
-  // A instituição é um User com perfil INSTITUTION e conta ativa.
-  const institution = await prisma.user.findFirst({
-    where: { id: institutionId, role: "INSTITUTION", status: "ACTIVE" },
-    select: { id: true },
+  // O id da rota é o da Institution (o mesmo de /api/institutions/:id), mas os pontos
+  // pertencem à conta (User) vinculada a ela, que precisa estar ativa.
+  const institution = await prisma.institution.findFirst({
+    where: {
+      id: institutionId,
+      active: true,
+      user: { is: { role: "INSTITUTION", status: "ACTIVE" } },
+    },
+    select: { userId: true },
   });
   if (!institution) throw new AppError(404, "Instituição não encontrada ou indisponível.");
 
-  const visible = { institutionId, active: true }; // RN12
+  const visible = { institutionId: institution.userId, active: true }; // RN12
 
   const [points, availableCategories] = await Promise.all([
     prisma.accessibilityPoint.findMany({
