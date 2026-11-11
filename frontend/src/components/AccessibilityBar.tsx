@@ -156,23 +156,11 @@ export default function AccessibilityBar({
           type="button"
           className="accessibility-toggle"
           onClick={() => setTema(tema === 'escuro' ? 'claro' : 'escuro')}
-          aria-pressed={tema === 'escuro'}
-          aria-label="Alternar tema escuro"
+          aria-label={
+            tema === 'escuro' ? 'Ativar tema claro' : 'Ativar tema escuro'
+          }
         >
-          ☾ Tema escuro
-        </button>
-
-        <button
-          type="button"
-          className="accessibility-toggle"
-          onClick={() => {
-            setFontScale(1)
-            setHighContrast(false)
-            setTema('claro')
-          }}
-          aria-label="Restaurar tamanho do texto, tema claro e desativar alto contraste"
-        >
-          ☼ Restaurar padrão
+          {tema === 'escuro' ? '☼ Tema claro' : '☾ Tema escuro'}
         </button>
       </div>
     </div>
