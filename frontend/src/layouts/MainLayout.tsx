@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import AccessibilityBar from '../components/AccessibilityBar'
+import VLibras from '../components/VLibras'
 
 function MainLayout() {
   const [highContrast, setHighContrast] = useState(false)
@@ -57,6 +58,8 @@ function MainLayout() {
       </main>
 
       <Footer />
+
+      <VLibras />
     </div>
   )
 }
