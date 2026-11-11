@@ -112,6 +112,12 @@
   white-space: nowrap;
 }
 
+/* Estado ativado dos botões de alternância */
+.accessibility-controls .accessibility-toggle[aria-pressed='true'] {
+  background-color: rgb(255 255 255 / 18%);
+  border-color: #8dccff;
+}
+
 /* Alto contraste */
 .high-contrast .accessibility-bar {
   background-color: #000000;
