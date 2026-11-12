@@ -1,0 +1,587 @@
+/* ========================================
+   TEMA ESCURO
+   Ativado por data-theme="escuro" na raiz (<html>).
+   Não se aplica quando o alto contraste está ligado, que tem prioridade.
+   Todas as combinações de cor abaixo foram conferidas para a WCAG 2.1 AA
+   (texto >= 4,5:1; bordas e componentes >= 3:1).
+   ======================================== */
+
+:root[data-theme='escuro'] {
+  color-scheme: dark;
+  color: #e8f0f7;
+  background-color: #0b1622;
+}
+
+:root[data-theme='escuro'] .app-layout:not(.high-contrast) {
+  /* Paleta */
+  --tema-fundo: #0b1622;
+  --tema-superficie: #12212f;
+  --tema-superficie-alt: #17304a;
+  --tema-destaque: #0f2740;
+  --tema-barra: #060e16;
+  --tema-campo: #0e1b28;
+  --tema-borda: #35516a;
+  --tema-borda-campo: #7f9bb3;
+  --tema-texto: #e8f0f7;
+  --tema-texto-suave: #b4c4d3;
+  --tema-acento: #8dccff;
+  --tema-acento-claro: #b6dffd;
+  --tema-acento-escuro: #071d33;
+  --tema-ativo: #1a6fb5;
+  --tema-erro: #ff9d97;
+  --tema-sucesso: #7ddba4;
+
+  color: var(--tema-texto);
+
+  /* ---------- Cabeçalho, navegação, barra e rodapé ---------- */
+  & .skip-link {
+    background-color: var(--tema-superficie);
+    color: var(--tema-texto);
+  }
+
+  & .accessibility-bar {
+    background-color: var(--tema-barra);
+    border-bottom: 1px solid var(--tema-borda);
+  }
+
+  & .header {
+    background-color: var(--tema-superficie);
+    border-bottom-color: var(--tema-borda);
+  }
+
+  & .header-logo {
+    filter: brightness(0) invert(1);
+  }
+
+  & .header-login {
+    background-color: var(--tema-acento);
+    color: var(--tema-acento-escuro);
+  }
+
+  & .header-login:hover {
+    background-color: var(--tema-acento-claro);
+  }
+
+  & .navbar-list a {
+    color: var(--tema-texto-suave);
+  }
+
+  & .navbar-list a:hover,
+  & .navbar-list a.active {
+    color: var(--tema-texto);
+  }
+
+  & .navbar-list a::after,
+  & .navbar-list a.active::after {
+    background-color: var(--tema-acento);
+  }
+
+  & .footer {
+    background-color: var(--tema-barra);
+    border-top: 1px solid var(--tema-borda);
+  }
+
+  /* ---------- Home ---------- */
+  & .hero,
+  & .instituicao-destaque,
+  & .sobre-destaque,
+  & .contato-destaque,
+  & .faq-destaque,
+  & .accessibility-hero {
+    background: linear-gradient(
+      110deg,
+      var(--tema-destaque) 0%,
+      var(--tema-fundo) 50%,
+      var(--tema-destaque) 100%
+    );
+    color: var(--tema-texto);
+  }
+
+  & .hero-eyebrow,
+  & .hero-content p,
+  & .instituicao-destaque-rotulo,
+  & .instituicao-destaque-conteudo p,
+  & .sobre-destaque-rotulo,
+  & .sobre-destaque-conteudo p,
+  & .contato-destaque-rotulo,
+  & .contato-destaque-conteudo p,
+  & .faq-destaque-rotulo,
+  & .faq-destaque-conteudo p,
+  & .accessibility-eyebrow,
+  & .accessibility-hero-content p {
+    color: var(--tema-acento);
+  }
+
+  & .button {
+    border-color: var(--tema-acento);
+  }
+
+  & .button-primary {
+    background-color: var(--tema-acento);
+    color: var(--tema-acento-escuro);
+  }
+
+  & .button-primary:hover {
+    background-color: var(--tema-acento-claro);
+  }
+
+  & .button-primary .search-icon {
+    filter: brightness(0);
+  }
+
+  & .button-secondary {
+    color: var(--tema-texto);
+  }
+
+  & .button-secondary:hover {
+    background-color: var(--tema-superficie-alt);
+  }
+
+  & .home-busca {
+    background-color: var(--tema-fundo);
+    color: var(--tema-texto);
+  }
+
+  & .home-busca-texto,
+  & .home-cartao p {
+    color: var(--tema-texto-suave);
+  }
+
+  & .home-busca-linha input {
+    background: var(--tema-campo);
+    color: var(--tema-texto);
+    border-color: var(--tema-borda-campo);
+  }
+
+  & .home-busca-linha input[aria-invalid='true'] {
+    border-color: var(--tema-erro);
+  }
+
+  & .home-busca-aviso {
+    color: var(--tema-erro);
+  }
+
+  & .home-cartao {
+    background: var(--tema-superficie);
+    border-color: var(--tema-borda);
+  }
+
+  & .home-cartao svg {
+    color: var(--tema-acento);
+  }
+
+  & .home-cartao-esqueleto {
+    background: linear-gradient(
+      90deg,
+      var(--tema-superficie) 25%,
+      var(--tema-superficie-alt) 50%,
+      var(--tema-superficie) 75%
+    );
+    background-size: 200% 100%;
+  }
+
+  /* ---------- Instituições ---------- */
+  & .instituicao-pagina,
+  & .sobre-pagina,
+  & .contato-pagina,
+  & .faq-pagina,
+  & .accessibility-features {
+    background-color: var(--tema-fundo);
+    color: var(--tema-texto);
+  }
+
+  & .instituicao-filtros {
+    background-color: var(--tema-superficie);
+    border-color: var(--tema-borda);
+    box-shadow: none;
+  }
+
+  & .instituicao-busca svg,
+  & .instituicao-cartao-icone,
+  & .instituicao-tag {
+    color: var(--tema-acento);
+  }
+
+  & .instituicao-busca input {
+    background-color: var(--tema-campo);
+    color: var(--tema-texto);
+    border-color: var(--tema-borda-campo);
+  }
+
+  & .instituicao-busca input::placeholder {
+    color: #9fb3c5;
+  }
+
+  & .instituicao-categoria {
+    background-color: var(--tema-superficie-alt);
+    color: var(--tema-texto);
+  }
+
+  & .instituicao-categoria:hover {
+    background-color: #1f3f5e;
+  }
+
+  & .instituicao-categoria.ativa {
+    background-color: var(--tema-acento);
+    color: var(--tema-acento-escuro);
+  }
+
+  & .instituicao-resultado,
+  & .instituicao-cartao-local {
+    color: var(--tema-texto-suave);
+  }
+
+  & .instituicao-vazio {
+    background-color: var(--tema-superficie);
+    border-color: var(--tema-borda);
+    color: var(--tema-texto-suave);
+  }
+
+  & .instituicao-cartao {
+    background-color: var(--tema-superficie);
+    border-color: var(--tema-borda);
+  }
+
+  & .instituicao-cartao:hover {
+    border-color: var(--tema-acento);
+    box-shadow: none;
+  }
+
+  & .instituicao-cartao-icone,
+  & .instituicao-tag {
+    background-color: var(--tema-superficie-alt);
+  }
+
+  /* ---------- Sobre ---------- */
+  & .sobre-valor,
+  & .sobre-recursos {
+    background-color: var(--tema-superficie);
+    border-color: var(--tema-borda);
+  }
+
+  & .sobre-valor-icone,
+  & .sobre-tipo {
+    background-color: var(--tema-superficie-alt);
+    color: var(--tema-acento);
+  }
+
+  & .sobre-valor h2,
+  & .sobre-tipo h3 {
+    color: var(--tema-texto);
+  }
+
+  & .sobre-valor p,
+  & .sobre-tipo p,
+  & .sobre-recursos-nota {
+    color: var(--tema-texto-suave);
+  }
+
+  & .sobre-numeros {
+    background-color: var(--tema-superficie-alt);
+  }
+
+  & .sobre-numero dt {
+    color: #c4d3e0;
+  }
+
+  & .sobre-recursos-link {
+    color: var(--tema-acento);
+  }
+
+  & .sobre-recursos-link:hover {
+    color: var(--tema-texto);
+  }
+
+  & .sobre-chamada {
+    background-color: var(--tema-superficie-alt);
+  }
+
+  & .sobre-chamada p {
+    color: var(--tema-acento);
+  }
+
+  & .sobre-botao-chamada {
+    background-color: var(--tema-acento);
+    color: var(--tema-acento-escuro);
+  }
+
+  & .sobre-botao-chamada:hover {
+    background-color: var(--tema-acento-claro);
+  }
+
+  /* ---------- Contato ---------- */
+  & .contato-motivo,
+  & .contato-form-card {
+    background-color: var(--tema-superficie);
+    border-color: var(--tema-borda);
+  }
+
+  & .contato-form-icone {
+    background-color: var(--tema-superficie-alt);
+    color: var(--tema-acento);
+  }
+
+  & .contato-motivo h2,
+  & .contato-form-cabecalho h2,
+  & .contato-campo {
+    color: var(--tema-texto);
+  }
+
+  & .contato-motivo p,
+  & .contato-form-cabecalho p {
+    color: var(--tema-texto-suave);
+  }
+
+  & .contato-campo input,
+  & .contato-campo select,
+  & .contato-campo textarea {
+    background-color: var(--tema-campo);
+    color: var(--tema-texto);
+    border-color: var(--tema-borda-campo);
+  }
+
+  & .contato-campo input:focus,
+  & .contato-campo select:focus,
+  & .contato-campo textarea:focus {
+    border-color: var(--tema-acento);
+    box-shadow: 0 0 0 3px rgb(141 204 255 / 25%);
+  }
+
+  & .contato-campo input[aria-invalid='true'],
+  & .contato-campo select[aria-invalid='true'],
+  & .contato-campo textarea[aria-invalid='true'] {
+    border-color: var(--tema-erro);
+  }
+
+  & .contato-erro {
+    color: var(--tema-erro);
+  }
+
+  & .contato-status {
+    color: var(--tema-sucesso);
+  }
+
+  & .contato-enviar {
+    background-color: var(--tema-acento);
+    border-color: var(--tema-acento);
+    color: var(--tema-acento-escuro);
+  }
+
+  & .contato-enviar:hover {
+    background-color: var(--tema-acento-claro);
+    color: var(--tema-acento-escuro);
+  }
+
+  /* ---------- FAQ ---------- */
+  & .faq-sidebar {
+    background-color: var(--tema-superficie-alt);
+  }
+
+  & .faq-sidebar > h2,
+  & .faq-suporte h2,
+  & .faq-resposta {
+    color: var(--tema-texto);
+  }
+
+  & .faq-categoria {
+    color: var(--tema-acento);
+  }
+
+  & .faq-categoria:hover {
+    background-color: rgb(255 255 255 / 8%);
+  }
+
+  & .faq-categoria.ativa {
+    background-color: var(--tema-ativo);
+    color: #ffffff;
+  }
+
+  & .faq-suporte,
+  & .faq-item,
+  & .faq-vazio {
+    background-color: var(--tema-superficie);
+    border-color: var(--tema-borda);
+  }
+
+  & .faq-suporte-icone,
+  & .faq-pergunta {
+    color: var(--tema-acento);
+  }
+
+  & .faq-suporte p,
+  & .faq-vazio {
+    color: var(--tema-texto-suave);
+  }
+
+  & .faq-botao-suporte {
+    background-color: var(--tema-acento);
+    border-color: var(--tema-acento);
+    color: var(--tema-acento-escuro);
+  }
+
+  & .faq-botao-suporte:hover {
+    background-color: var(--tema-acento-claro);
+    color: var(--tema-acento-escuro);
+  }
+
+  & .faq-item.aberta {
+    background-color: var(--tema-superficie-alt);
+    border-color: var(--tema-borda);
+  }
+
+  /* ---------- Login ---------- */
+  & .login {
+    background: var(--tema-destaque);
+  }
+
+  & .login-apresentacao h1,
+  & .botao-link {
+    color: var(--tema-texto);
+  }
+
+  & .login-apresentacao p,
+  & .login-esqueci-senha,
+  & .login-campo svg {
+    color: var(--tema-acento);
+  }
+
+  & .login-cartao {
+    background: var(--tema-superficie);
+    box-shadow: 0 12px 32px rgb(0 0 0 / 45%);
+  }
+
+  & .login-abas {
+    background: var(--tema-superficie-alt);
+  }
+
+  & .login-aba {
+    color: var(--tema-acento);
+  }
+
+  & .login-aba.ativa {
+    background: var(--tema-acento);
+    color: var(--tema-acento-escuro);
+  }
+
+  & .login-campo input,
+  & .login-google {
+    background: var(--tema-campo);
+    border-color: var(--tema-borda-campo);
+    color: var(--tema-texto);
+  }
+
+  & .login-campo input::placeholder {
+    color: #9fb3c5;
+  }
+
+  & .login-enviar {
+    background: var(--tema-acento);
+    color: var(--tema-acento-escuro);
+  }
+
+  & .login-divisor {
+    color: var(--tema-texto-suave);
+  }
+
+  & .login-divisor::before,
+  & .login-divisor::after {
+    background: var(--tema-borda);
+  }
+
+  /* ---------- Página de acessibilidade ---------- */
+  & .accessibility-feature-card,
+  & .accessibility-shortcuts-content {
+    background-color: var(--tema-superficie);
+    border-color: var(--tema-borda);
+  }
+
+  & .accessibility-feature-icon,
+  & .accessibility-shortcuts-tip {
+    background-color: var(--tema-superficie-alt);
+    color: var(--tema-acento);
+  }
+
+  & .accessibility-feature-content h3,
+  & .accessibility-shortcuts-info,
+  & .accessibility-shortcuts-tip h3 {
+    color: var(--tema-texto);
+  }
+
+  & .accessibility-feature-content p,
+  & .accessibility-shortcuts-note {
+    color: var(--tema-texto-suave);
+  }
+
+  & .accessibility-contact {
+    background-color: var(--tema-superficie-alt);
+  }
+
+  /* ---------- Mapa ---------- */
+  & .mapa-header h1,
+  & .mapa-popup h2,
+  & .mapa-lista-item h2,
+  & .mapa-mensagem {
+    color: var(--tema-texto);
+  }
+
+  & .mapa-header p,
+  & .mapa-lista-item p {
+    color: var(--tema-texto-suave);
+  }
+
+  & .mapa-alternar-botao {
+    background: var(--tema-superficie);
+    border-color: var(--tema-acento);
+    color: var(--tema-texto);
+  }
+
+  & .mapa-alternar-botao[aria-pressed='true'] {
+    background: var(--tema-ativo);
+    border-color: var(--tema-ativo);
+    color: #ffffff;
+  }
+
+  & .mapa-container {
+    border-color: var(--tema-acento);
+  }
+
+  & .mapa-page .mapa-nota {
+    color: #f5b301;
+  }
+
+  & .mapa-botao {
+    background: var(--tema-acento);
+    border-color: var(--tema-acento);
+    color: var(--tema-acento-escuro) !important;
+  }
+
+  & .mapa-botao:hover {
+    background: var(--tema-acento-claro);
+    border-color: var(--tema-acento-claro);
+  }
+
+  & .mapa-mensagem,
+  & .mapa-lista-item {
+    background: var(--tema-superficie);
+    border-color: var(--tema-borda);
+  }
+
+  & .mapa-mensagem-erro {
+    border-color: var(--tema-erro);
+  }
+
+  & .mapa-lista-item svg {
+    color: var(--tema-acento);
+  }
+
+  /* Popup do Leaflet */
+  & .leaflet-popup-content-wrapper,
+  & .leaflet-popup-tip {
+    background: var(--tema-superficie);
+    color: var(--tema-texto);
+  }
+
+  & .leaflet-container a.leaflet-popup-close-button {
+    color: var(--tema-texto-suave);
+  }
+}

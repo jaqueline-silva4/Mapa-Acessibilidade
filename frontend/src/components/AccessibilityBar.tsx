@@ -7,6 +7,8 @@ interface AccessibilityBarProps {
   setHighContrast: (enabled: boolean) => void
   fontScale: number
   setFontScale: (scale: number) => void
+  tema: 'claro' | 'escuro'
+  setTema: (tema: 'claro' | 'escuro') => void
 }
 
 export default function AccessibilityBar({
@@ -14,6 +16,8 @@ export default function AccessibilityBar({
   setHighContrast,
   fontScale,
   setFontScale,
+  tema,
+  setTema,
 }: AccessibilityBarProps) {
   useEffect(() => {
     function handleKeyboardShortcut(event: KeyboardEvent) {
@@ -151,13 +155,12 @@ export default function AccessibilityBar({
         <button
           type="button"
           className="accessibility-toggle"
-          onClick={() => {
-            setFontScale(1)
-            setHighContrast(false)
-          }}
-          aria-label="Restaurar tamanho do texto e desativar alto contraste"
+          onClick={() => setTema(tema === 'escuro' ? 'claro' : 'escuro')}
+          aria-label={
+            tema === 'escuro' ? 'Ativar tema claro' : 'Ativar tema escuro'
+          }
         >
-          ☼ Tema claro
+          {tema === 'escuro' ? '☼ Tema claro' : '☾ Tema escuro'}
         </button>
       </div>
     </div>
