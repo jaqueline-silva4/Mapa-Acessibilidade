@@ -24,3 +24,29 @@ export const AccountStatus = {
 } as const
 
 export type AccountStatus = (typeof AccountStatus)[keyof typeof AccountStatus]
+
+
+export const FAQItem_category = {
+  MAP: 'MAP',
+  SCREEN_READERS: 'SCREEN_READERS',
+  LIBRAS: 'LIBRAS',
+  GENERAL: 'GENERAL'
+} as const
+
+export type FAQItem_category = (typeof FAQItem_category)[keyof typeof FAQItem_category]
+
+
+export const ContactMessage_reason = {
+  QUESTION: 'QUESTION',
+  REGISTRATION_REQUEST: 'REGISTRATION_REQUEST'
+} as const
+
+export type ContactMessage_reason = (typeof ContactMessage_reason)[keyof typeof ContactMessage_reason]
+
+
+export const ContactMessage_status = {
+  PENDING: 'PENDING',
+  ANSWERED: 'ANSWERED'
+} as const
+
+export type ContactMessage_status = (typeof ContactMessage_status)[keyof typeof ContactMessage_status]

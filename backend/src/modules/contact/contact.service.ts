@@ -17,3 +17,13 @@ export async function listContactMessages() {
     },
   });
 }
+
+export async function updateContactMessageStatus(
+  id: number,
+  status: "PENDING" | "ANSWERED"
+) {
+  return prisma.contactMessage.update({
+    where: { id },
+    data: { status },
+  });
+}

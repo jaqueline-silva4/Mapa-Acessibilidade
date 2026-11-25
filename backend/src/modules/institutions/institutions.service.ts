@@ -66,6 +66,20 @@ export async function createInstitution(input: CreateInstitutionInput) {
     );
   }
 
+  if (input.customDomain) {
+    const existingDomain = await prisma.institution.findUnique({
+      where: { customDomain: input.customDomain },
+      select: { id: true },
+    });
+
+    if (existingDomain) {
+      throw new AuthError(
+        409,
+        "Já existe uma instituição cadastrada com este domínio personalizado."
+      );
+    }
+  }
+
   const temporaryPassword = generateTemporaryPassword();
   const passwordHash = await hashPassword(temporaryPassword);
 
@@ -166,6 +180,23 @@ export async function updateInstitution(
         }
       }
 
+      if (input.customDomain) {
+        const duplicateDomain = await tx.institution.findFirst({
+          where: {
+            customDomain: input.customDomain,
+            id: { not: id },
+          },
+          select: { id: true },
+        });
+
+        if (duplicateDomain) {
+          throw new AuthError(
+            409,
+            "Já existe uma instituição cadastrada com este domínio personalizado."
+          );
+        }
+      }
+
       // Atualiza os dados da conta de acesso.
       await tx.user.update({
         where: { id: existingInstitution.userId },
@@ -211,6 +242,7 @@ export async function listInstitutions(
       ? {
           OR: [
             { name: { contains: search } },
+            { unitName: { contains: search } },
             { cnpj: { contains: search } },
             { email: { contains: search } },
             { city: { contains: search } },
@@ -297,6 +329,66 @@ export async function updateInstitutionStatus(
   });
 }
 
+// Exclui uma instituição e sua conta de acesso vinculada.
+export async function deleteInstitution(id: number) {
+  return prisma.$transaction(async (tx) => {
+    const existingInstitution = await tx.institution.findUnique({
+      where: { id },
+      select: { id: true, name: true, userId: true },
+    });
+
+    if (!existingInstitution) {
+      throw new AuthError(404, "Instituição não encontrada.");
+    }
+
+    await tx.institution.delete({ where: { id } });
+    await tx.user.delete({ where: { id: existingInstitution.userId } });
+
+    return {
+      id: existingInstitution.id,
+      name: existingInstitution.name,
+    };
+  });
+}
+
+// Gera uma nova senha provisória para a conta vinculada à instituição.
+export async function resetInstitutionPassword(id: number) {
+  const existingInstitution = await prisma.institution.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      name: true,
+      cnpj: true,
+      userId: true,
+      user: { select: { login: true } },
+    },
+  });
+
+  if (!existingInstitution) {
+    throw new AuthError(404, "Instituição não encontrada.");
+  }
+
+  const temporaryPassword = generateTemporaryPassword();
+  const passwordHash = await hashPassword(temporaryPassword);
+
+  await prisma.user.update({
+    where: { id: existingInstitution.userId },
+    data: {
+      passwordHash,
+      isTemporaryPassword: true,
+      failedLoginAttempts: 0,
+      lockedUntil: null,
+    },
+  });
+
+  return {
+    institutionId: existingInstitution.id,
+    institutionName: existingInstitution.name,
+    login: existingInstitution.user.login,
+    temporaryPassword,
+  };
+}
+
  // Lista instituições ativas para consulta pública.
 export async function listPublicInstitutions(
   filters: PublicInstitutionsQuery
@@ -315,6 +407,7 @@ export async function listPublicInstitutions(
       ? {
           OR: [
             { name: { contains: search } },
+            { unitName: { contains: search } },
             { city: { contains: search } },
           ],
         }
@@ -327,6 +420,7 @@ export async function listPublicInstitutions(
     select: {
       id: true,
       name: true,
+      unitName: true,
       description: true,
       street: true,
       number: true,
@@ -336,6 +430,8 @@ export async function listPublicInstitutions(
       zipCode: true,
       latitude: true,
       longitude: true,
+      logoUrl: true,
+      coverUrl: true,
     },
     orderBy: {
       name: "asc",
@@ -360,6 +456,7 @@ export async function getPublicInstitutionById(id: number) {
     select: {
       id: true,
       name: true,
+      unitName: true,
       description: true,
       phone: true,
       email: true,
@@ -371,6 +468,11 @@ export async function getPublicInstitutionById(id: number) {
       zipCode: true,
       latitude: true,
       longitude: true,
+      logoUrl: true,
+      coverUrl: true,
+      floorPlanUrl: true,
+      floorPlanAlt: true,
+      customDomain: true,
     },
   });
 
@@ -381,7 +483,86 @@ export async function getPublicInstitutionById(id: number) {
   return institution;
 }
 
- // Lista instituições ativas para exibição no mapa.
+export async function getPublicInstitutionByDomain(rawDomain: string) {
+  const domain = rawDomain
+    .trim()
+    .toLowerCase()
+    .replace(/^https?:\/\//, "")
+    .split("/")[0]
+    .split(":")[0]
+    .replace(/\.+$/, "");
+
+  const institution = await prisma.institution.findFirst({
+    where: {
+      customDomain: domain,
+      active: true,
+      user: {
+        is: {
+          status: "ACTIVE",
+        },
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      unitName: true,
+      description: true,
+      phone: true,
+      email: true,
+      street: true,
+      number: true,
+      neighborhood: true,
+      city: true,
+      state: true,
+      zipCode: true,
+      latitude: true,
+      longitude: true,
+      logoUrl: true,
+      coverUrl: true,
+      floorPlanUrl: true,
+      floorPlanAlt: true,
+      customDomain: true,
+    },
+  });
+
+  if (!institution) {
+    throw new AuthError(404, "Instituição não encontrada para este domínio.");
+  }
+
+  return institution;
+}
+
+// Busca o perfil completo da instituição autenticada pelo userId.
+export async function getInstitutionProfileByUserId(userId: number) {
+  const institution = await prisma.institution.findUnique({
+    where: { userId },
+  });
+
+  if (!institution) {
+    throw new AuthError(404, "Instituição não encontrada.");
+  }
+
+  return institution;
+}
+
+// Atualiza o perfil da instituição autenticada pelo userId.
+export async function updateInstitutionProfileByUserId(
+  userId: number,
+  input: UpdateInstitutionInput
+) {
+  const existing = await prisma.institution.findUnique({
+    where: { userId },
+    select: { id: true },
+  });
+
+  if (!existing) {
+    throw new AuthError(404, "Instituição não encontrada.");
+  }
+
+  return updateInstitution(existing.id, input);
+}
+
+// Lista instituições ativas para exibição no mapa.
 export async function listPublicInstitutionsMap() {
   const institutions = await prisma.institution.findMany({
     where: {
@@ -395,6 +576,7 @@ export async function listPublicInstitutionsMap() {
     select: {
       id: true,
       name: true,
+      unitName: true,
       description: true,
       street: true,
       number: true,

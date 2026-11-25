@@ -3,11 +3,8 @@ import './Navbar.css'
 
 const links = [
   { label: 'Início', href: '/' },
-  { label: 'Instituições', href: '/instituicoes' },
-  { label: 'Mapa', href: '/mapa' },
   { label: 'Sobre', href: '/sobre' },
   { label: 'FAQ', href: '/faq' },
-  { label: 'Fale Conosco', href: '/contato' },
 ]
 
 export default function Navbar() {

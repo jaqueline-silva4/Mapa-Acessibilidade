@@ -22,7 +22,8 @@ const Footer = () => {
           <a href="/mapa">Mapa</a>
           <a href="/sobre">Sobre</a>
           <a href="/faq">FAQ</a>
-          <a href="/contato">Fale Conosco</a>
+          <a href="/#contato-home">Fale Conosco</a>
+          <a href="/login">Área Administrativa</a>
         </div>
 
         <div className="footer-contact">

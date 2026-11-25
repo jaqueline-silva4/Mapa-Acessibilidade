@@ -1,7 +1,9 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import { AuthProvider } from './contexts/AuthContext'
 import MainLayout from './layouts/MainLayout'
+import VLibras from './components/VLibras'
 
 import Home from './pages/Home'
 import Instituicoes from './pages/Instituicoes'
@@ -11,25 +13,42 @@ import FAQ from './pages/FAQ'
 import Login from './pages/Login'
 import Acessibilidade from './pages/Acessibilidade'
 import Contato from './pages/Contato'
+import AdminInstituicoes from './pages/AdminInstituicoes'
+import InstituicaoConfiguracoes from './pages/InstituicaoConfiguracoes'
+import InstituicaoPublica from './pages/InstituicaoPublica'
+import SolicitarCadastro from './pages/SolicitarCadastro'
 
 import './App.css'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/instituicoes" element={<Instituicoes />} />
-          <Route path="/mapa" element={<Mapa />} />
-          <Route path="/sobre" element={<Sobre />} />
-          <Route path="/faq" element={<FAQ />} />
+    <AuthProvider>
+      <VLibras />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/instituicoes" element={<Instituicoes />} />
+            <Route path="/mapa" element={<Mapa />} />
+            <Route path="/sobre" element={<Sobre />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/acessibilidade" element={<Acessibilidade />} />
+            <Route path="/contato" element={<Contato />} />
+            <Route
+              path="/solicitar-cadastro"
+              element={<SolicitarCadastro />}
+            />
+          </Route>
           <Route path="/login" element={<Login />} />
-          <Route path="/acessibilidade" element={<Acessibilidade />} />
-          <Route path="/contato" element={<Contato />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          <Route path="/admin/instituicoes" element={<AdminInstituicoes />} />
+          <Route path="/instituicoes/:id" element={<InstituicaoPublica />} />
+          <Route
+            path="/instituicao/configuracoes"
+            element={<InstituicaoConfiguracoes />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 

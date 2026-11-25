@@ -5,7 +5,7 @@
   align-items: center;
   gap: 32px;
   min-height: 400px;
-  padding: 40px 10%;
+  padding: 40px max(24px, calc((100% - 1200px) / 2));
   background: linear-gradient(
     110deg,
     #D1ECFF 0%,
@@ -20,8 +20,8 @@
 .accessibility-hero-content {
   width: 100%;
   max-width: 580px;
-  justify-self: center;
-  padding-left: 30px;
+  justify-self: start;
+  padding-left: 0;
 }
 
 .accessibility-eyebrow {
@@ -70,14 +70,14 @@
 
 .accessibility-features {
   width: 100%;
-  padding: 24px 5.2% 40px;
+  padding: 24px max(24px, calc((100% - 1200px) / 2)) 40px;
   background-color: #f3f7fa;
   color: #071d33;
 }
 
 .accessibility-features-container {
   width: 100%;
-  max-width: 1118px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -140,7 +140,7 @@
 
 .accessibility-shortcuts-info {
   width: 100%;
-  max-width: 1118px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 0 32px;
   color: #071d33;
@@ -204,7 +204,7 @@
   justify-content: space-between;
   gap: 20px;
   width: 100%;
-  max-width: 1118px;
+  max-width: 1200px;
   margin: 0 auto 30px;
   padding: 24px 30px;
   box-sizing: border-box;

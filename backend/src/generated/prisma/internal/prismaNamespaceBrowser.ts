@@ -55,7 +55,12 @@ export const ModelName = {
   PasswordResetToken: 'PasswordResetToken',
   AccessibilityCategory: 'AccessibilityCategory',
   AccessibilityPoint: 'AccessibilityPoint',
-  AccessibilityImage: 'AccessibilityImage'
+  AccessibilityImage: 'AccessibilityImage',
+  Institution: 'Institution',
+  Review: 'Review',
+  ContactMessage: 'ContactMessage',
+  FAQItem: 'FAQItem',
+  AuditLog: 'AuditLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -139,6 +144,87 @@ export const AccessibilityImageScalarFieldEnum = {
 export type AccessibilityImageScalarFieldEnum = (typeof AccessibilityImageScalarFieldEnum)[keyof typeof AccessibilityImageScalarFieldEnum]
 
 
+export const InstitutionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  unitName: 'unitName',
+  cnpj: 'cnpj',
+  phone: 'phone',
+  email: 'email',
+  description: 'description',
+  street: 'street',
+  number: 'number',
+  neighborhood: 'neighborhood',
+  city: 'city',
+  state: 'state',
+  zipCode: 'zipCode',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  logoUrl: 'logoUrl',
+  coverUrl: 'coverUrl',
+  floorPlanUrl: 'floorPlanUrl',
+  floorPlanAlt: 'floorPlanAlt',
+  customDomain: 'customDomain',
+  active: 'active',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InstitutionScalarFieldEnum = (typeof InstitutionScalarFieldEnum)[keyof typeof InstitutionScalarFieldEnum]
+
+
+export const ReviewScalarFieldEnum = {
+  id: 'id',
+  institutionId: 'institutionId',
+  authorName: 'authorName',
+  authorEmail: 'authorEmail',
+  rating: 'rating',
+  comment: 'comment',
+  active: 'active',
+  createdAt: 'createdAt'
+} as const
+
+export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+export const ContactMessageScalarFieldEnum = {
+  id: 'id',
+  reason: 'reason',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  message: 'message',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type ContactMessageScalarFieldEnum = (typeof ContactMessageScalarFieldEnum)[keyof typeof ContactMessageScalarFieldEnum]
+
+
+export const FAQItemScalarFieldEnum = {
+  id: 'id',
+  category: 'category',
+  question: 'question',
+  answer: 'answer'
+} as const
+
+export type FAQItemScalarFieldEnum = (typeof FAQItemScalarFieldEnum)[keyof typeof FAQItemScalarFieldEnum]
+
+
+export const AuditLogScalarFieldEnum = {
+  id: 'id',
+  adminId: 'adminId',
+  action: 'action',
+  targetEntity: 'targetEntity',
+  targetId: 'targetId',
+  details: 'details',
+  createdAt: 'createdAt'
+} as const
+
+export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -194,4 +280,63 @@ export const AccessibilityImageOrderByRelevanceFieldEnum = {
 } as const
 
 export type AccessibilityImageOrderByRelevanceFieldEnum = (typeof AccessibilityImageOrderByRelevanceFieldEnum)[keyof typeof AccessibilityImageOrderByRelevanceFieldEnum]
+
+
+export const InstitutionOrderByRelevanceFieldEnum = {
+  name: 'name',
+  unitName: 'unitName',
+  cnpj: 'cnpj',
+  phone: 'phone',
+  email: 'email',
+  description: 'description',
+  street: 'street',
+  number: 'number',
+  neighborhood: 'neighborhood',
+  city: 'city',
+  state: 'state',
+  zipCode: 'zipCode',
+  logoUrl: 'logoUrl',
+  coverUrl: 'coverUrl',
+  floorPlanUrl: 'floorPlanUrl',
+  floorPlanAlt: 'floorPlanAlt',
+  customDomain: 'customDomain'
+} as const
+
+export type InstitutionOrderByRelevanceFieldEnum = (typeof InstitutionOrderByRelevanceFieldEnum)[keyof typeof InstitutionOrderByRelevanceFieldEnum]
+
+
+export const ReviewOrderByRelevanceFieldEnum = {
+  authorName: 'authorName',
+  authorEmail: 'authorEmail',
+  comment: 'comment'
+} as const
+
+export type ReviewOrderByRelevanceFieldEnum = (typeof ReviewOrderByRelevanceFieldEnum)[keyof typeof ReviewOrderByRelevanceFieldEnum]
+
+
+export const ContactMessageOrderByRelevanceFieldEnum = {
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  message: 'message'
+} as const
+
+export type ContactMessageOrderByRelevanceFieldEnum = (typeof ContactMessageOrderByRelevanceFieldEnum)[keyof typeof ContactMessageOrderByRelevanceFieldEnum]
+
+
+export const FAQItemOrderByRelevanceFieldEnum = {
+  question: 'question',
+  answer: 'answer'
+} as const
+
+export type FAQItemOrderByRelevanceFieldEnum = (typeof FAQItemOrderByRelevanceFieldEnum)[keyof typeof FAQItemOrderByRelevanceFieldEnum]
+
+
+export const AuditLogOrderByRelevanceFieldEnum = {
+  action: 'action',
+  targetEntity: 'targetEntity',
+  details: 'details'
+} as const
+
+export type AuditLogOrderByRelevanceFieldEnum = (typeof AuditLogOrderByRelevanceFieldEnum)[keyof typeof AuditLogOrderByRelevanceFieldEnum]
 

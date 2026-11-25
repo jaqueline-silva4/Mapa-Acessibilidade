@@ -7,7 +7,10 @@ import { adminRouter } from "./routes/admin.routes.js";
 import { authRouter } from "./routes/auth.routes.js";
 import path from "node:path";
 import { categoriesRouter, institutionPointsRouter, publicPointsRouter } from "./modules/points/points.routes.js";
-import { publicInstitutionsRouter } from "./modules/institutions/institutions.routes.js";
+import {
+  institutionProfileRouter,
+  publicInstitutionsRouter,
+} from "./modules/institutions/institutions.routes.js";
 import { reviewsRouter } from "./modules/reviews/reviews.routes.js";
 import { faqRouter } from "./modules/faq/faq.routes.js";
 import { contactRouter } from "./modules/contact/contact.routes.js";
@@ -19,6 +22,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRouter);
 app.use("/uploads", express.static(path.resolve(process.cwd(), "uploads")));
+app.use("/api/institution/profile", institutionProfileRouter);
 app.use("/api/institution/points", institutionPointsRouter);
 app.use("/api/institutions", publicPointsRouter);
 app.use("/api/accessibility-categories", categoriesRouter);

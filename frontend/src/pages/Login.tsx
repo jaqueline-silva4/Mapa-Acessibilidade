@@ -1,195 +1,242 @@
 import { useState, type SubmitEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ArrowLeft, Lock, User } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
 import "./Login.css";
 
-type Aba = "entrar" | "criar";
-
 function Login() {
-  const [aba, setAba] = useState<Aba>("entrar");
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const navigate = useNavigate();
+  const { login, changeTemporaryPassword } = useAuth();
 
-  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault(); // evita recarregar a página
-    // Por enquanto só mostra no console. Depois será ligado à API.
-    console.log({ aba, nome, email, senha });
+  const [loginInput, setLoginInput] = useState("");
+  const [senha, setSenha] = useState("");
+  const [novaSenha, setNovaSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [precisaTrocarSenha, setPrecisaTrocarSenha] = useState(false);
+  const [carregando, setCarregando] = useState(false);
+  const [erro, setErro] = useState<string | null>(null);
+  const [aviso, setAviso] = useState<string | null>(null);
+
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErro(null);
+    setAviso(null);
+
+    setCarregando(true);
+    try {
+      const user = await login(loginInput, senha);
+      if (user.isTemporaryPassword) {
+        setPrecisaTrocarSenha(true);
+        setAviso(
+          "Você entrou com uma senha provisória. Defina uma nova senha para continuar."
+        );
+        return;
+      }
+
+      navigate(
+        user.role === "ADMIN"
+          ? "/admin/instituicoes"
+          : "/instituicao/configuracoes"
+      );
+    } catch (error) {
+      setErro(
+        error instanceof Error
+          ? error.message
+          : "Não foi possível realizar o login."
+      );
+    } finally {
+      setCarregando(false);
+    }
+  };
+
+  const handleChangeTempPassword = async (e: SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErro(null);
+
+    if (novaSenha !== confirmarSenha) {
+      setErro("As senhas não conferem.");
+      return;
+    }
+
+    setCarregando(true);
+    try {
+      const user = await changeTemporaryPassword(novaSenha);
+      setPrecisaTrocarSenha(false);
+      navigate(
+        user.role === "ADMIN"
+          ? "/admin/instituicoes"
+          : "/instituicao/configuracoes"
+      );
+    } catch (error) {
+      setErro(
+        error instanceof Error
+          ? error.message
+          : "Não foi possível atualizar a senha."
+      );
+    } finally {
+      setCarregando(false);
+    }
   };
 
   return (
-    <section className="login">
-      <div className="login-conteudo">
-        <div className="login-apresentacao">
-          <h1>Bem-vindo ao Acessa+</h1>
-          <p>
-            Entre para avaliar instituições e ajudar a tornar a cidade mais
-            acessível.
-          </p>
-          <img
-            className="login-ilustracao"
-            src="/ilustracao-acessibilidade.png"
-            alt="Grupo de pessoas com diferentes deficiências sorrindo juntas"
-          />
+    <main className="login-page">
+      <div className="login-shell">
+        <div className="login-topo">
+          <Link className="login-voltar" to="/">
+            <ArrowLeft size={16} aria-hidden="true" />
+            <span>Voltar para o site</span>
+          </Link>
         </div>
 
-        <div className="login-cartao">
-          <div className="login-abas" role="tablist">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={aba === "entrar"}
-              className={`login-aba ${aba === "entrar" ? "ativa" : ""}`}
-              onClick={() => setAba("entrar")}
-            >
-              Entrar
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={aba === "criar"}
-              className={`login-aba ${aba === "criar" ? "ativa" : ""}`}
-              onClick={() => setAba("criar")}
-            >
-              Criar conta
-            </button>
+        <section className="login-cartao" aria-labelledby="login-titulo">
+          <div className="login-marca">
+            <img
+              className="login-marca-logo"
+              src="/logo-acessa.png"
+              alt="Acessa+"
+            />
+            <span className="login-badge">Acesso ao Sistema</span>
           </div>
 
-          <form className="login-formulario" onSubmit={handleSubmit}>
-            {aba === "criar" && (
+          {precisaTrocarSenha ? (
+            <form
+              className="login-formulario"
+              onSubmit={handleChangeTempPassword}
+            >
+              <h1 id="login-titulo" className="login-titulo">
+                Definir nova senha
+              </h1>
+              <p className="login-subtexto">
+                Por segurança, substitua a senha provisória antes de acessar o
+                painel.
+              </p>
+
+              {aviso && (
+                <p className="login-aviso" role="status">
+                  {aviso}
+                </p>
+              )}
+              {erro && (
+                <p className="login-erro" role="alert">
+                  {erro}
+                </p>
+              )}
+
               <div className="login-campo">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="16"
-                  height="16"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  aria-hidden="true"
-                >
-                  <circle cx="12" cy="8" r="4" />
-                  <path d="M4 21a8 8 0 0 1 16 0" />
-                </svg>
-                <label htmlFor="nome" className="somente-leitor-tela">
-                  Nome
+                <Lock size={16} aria-hidden="true" />
+                <label htmlFor="nova-senha" className="somente-leitor-tela">
+                  Nova senha
                 </label>
                 <input
-                  id="nome"
-                  type="text"
-                  placeholder="Nome"
-                  autoComplete="name"
-                  value={nome}
-                  onChange={(e) => setNome(e.target.value)}
+                  id="nova-senha"
+                  type="password"
+                  placeholder="Nova senha"
+                  autoComplete="new-password"
+                  value={novaSenha}
+                  onChange={(e) => setNovaSenha(e.target.value)}
                   required
                 />
               </div>
-            )}
 
-            <div className="login-campo">
-              <svg
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                aria-hidden="true"
-              >
-                <rect x="3" y="5" width="18" height="14" rx="2" />
-                <path d="m3 7 9 6 9-6" />
-              </svg>
-              <label htmlFor="email" className="somente-leitor-tela">
-                E-mail
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="E-mail"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
+              <div className="login-campo">
+                <Lock size={16} aria-hidden="true" />
+                <label
+                  htmlFor="confirmar-senha"
+                  className="somente-leitor-tela"
+                >
+                  Confirmar nova senha
+                </label>
+                <input
+                  id="confirmar-senha"
+                  type="password"
+                  placeholder="Confirmar nova senha"
+                  autoComplete="new-password"
+                  value={confirmarSenha}
+                  onChange={(e) => setConfirmarSenha(e.target.value)}
+                  required
+                />
+              </div>
 
-            <div className="login-campo">
-              <svg
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                aria-hidden="true"
-              >
-                <rect x="5" y="11" width="14" height="10" rx="2" />
-                <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-              </svg>
-              <label htmlFor="senha" className="somente-leitor-tela">
-                Senha
-              </label>
-              <input
-                id="senha"
-                type="password"
-                placeholder="Senha"
-                autoComplete={
-                  aba === "entrar" ? "current-password" : "new-password"
-                }
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-                required
-              />
-            </div>
-
-            <button type="submit" className="login-enviar">
-              {aba === "entrar" ? "Entrar" : "Criar conta"}
-            </button>
-          </form>
-
-          <div className="login-links">
-            {aba === "entrar" && (
-              <a className="login-esqueci-senha" href="#">
-                Esqueci minha senha
-              </a>
-            )}
-            <p>
-              {aba === "entrar" ? "Não tem conta? " : "Já tem conta? "}
               <button
-                type="button"
-                className="botao-link"
-                onClick={() => setAba(aba === "entrar" ? "criar" : "entrar")}
+                type="submit"
+                className="login-enviar"
+                disabled={carregando}
               >
-                {aba === "entrar" ? "Criar usuário" : "Entrar"}
+                {carregando ? "Salvando..." : "Salvar nova senha"}
               </button>
-            </p>
-          </div>
+            </form>
+          ) : (
+            <>
+              <h1 id="login-titulo" className="login-titulo">
+                Área Administrativa
+              </h1>
+              <p className="login-subtexto">
+                Entre com suas credenciais de administrador ou instituição.
+              </p>
 
-          <div className="login-divisor">
-            <span>ou</span>
-          </div>
+              {erro && (
+                <p className="login-erro" role="alert">
+                  {erro}
+                </p>
+              )}
+              {aviso && (
+                <p className="login-aviso" role="status">
+                  {aviso}
+                </p>
+              )}
 
-          <button type="button" className="login-google">
-            <svg viewBox="0 0 48 48" width="16" height="16" aria-hidden="true">
-              <path
-                fill="#EA4335"
-                d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"
-              />
-              <path
-                fill="#4285F4"
-                d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"
-              />
-              <path
-                fill="#FBBC05"
-                d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"
-              />
-              <path
-                fill="#34A853"
-                d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"
-              />
-            </svg>
-            Continuar com Google
-          </button>
-        </div>
+              <form className="login-formulario" onSubmit={handleSubmit}>
+                <div className="login-campo">
+                  <User size={16} aria-hidden="true" />
+                  <label htmlFor="login-id" className="somente-leitor-tela">
+                    Usuário ou CNPJ
+                  </label>
+                  <input
+                    id="login-id"
+                    type="text"
+                    placeholder="Usuário ou CNPJ"
+                    autoComplete="username"
+                    value={loginInput}
+                    onChange={(e) => setLoginInput(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="login-campo">
+                  <Lock size={16} aria-hidden="true" />
+                  <label htmlFor="senha" className="somente-leitor-tela">
+                    Senha
+                  </label>
+                  <input
+                    id="senha"
+                    type="password"
+                    placeholder="Senha"
+                    autoComplete="current-password"
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="login-enviar"
+                  disabled={carregando}
+                >
+                  {carregando ? "Entrando..." : "Entrar"}
+                </button>
+              </form>
+
+              <div className="login-links">
+                <a className="login-esqueci-senha" href="#">
+                  Esqueci minha senha
+                </a>
+              </div>
+            </>
+          )}
+        </section>
       </div>
-    </section>
+    </main>
   );
 }
 

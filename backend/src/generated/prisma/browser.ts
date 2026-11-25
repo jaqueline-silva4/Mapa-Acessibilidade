@@ -42,3 +42,28 @@ export type AccessibilityPoint = Prisma.AccessibilityPointModel
  * 
  */
 export type AccessibilityImage = Prisma.AccessibilityImageModel
+/**
+ * Model Institution
+ * 
+ */
+export type Institution = Prisma.InstitutionModel
+/**
+ * Model Review
+ * 
+ */
+export type Review = Prisma.ReviewModel
+/**
+ * Model ContactMessage
+ * 
+ */
+export type ContactMessage = Prisma.ContactMessageModel
+/**
+ * Model FAQItem
+ * 
+ */
+export type FAQItem = Prisma.FAQItemModel
+/**
+ * Model AuditLog
+ * 
+ */
+export type AuditLog = Prisma.AuditLogModel

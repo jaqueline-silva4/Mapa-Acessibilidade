@@ -18,7 +18,10 @@ import {
 
 import * as institutionService from "../modules/institutions/institutions.service.js";
 import { moderateReview } from "../modules/reviews/reviews.service.js";
-import { listContactMessages } from "../modules/contact/contact.service.js";
+import {
+  listContactMessages,
+  updateContactMessageStatus,
+} from "../modules/contact/contact.service.js";
 
 const paramsSchema = z.object({
   id: z.coerce.number().int().positive(),
@@ -162,6 +165,51 @@ adminRouter.patch("/institutions/:id/status", async (req, res) => {
   }
 });
 
+// Redefinir senha provisória da instituição
+adminRouter.post("/institutions/:id/reset-password", async (req, res) => {
+  const id = institutionIdSchema.safeParse(req.params.id);
+
+  if (!id.success) {
+    res.status(400).json({
+      message: "Informe um id válido para a instituição.",
+    });
+    return;
+  }
+
+  try {
+    const result = await institutionService.resetInstitutionPassword(id.data);
+    res.json({
+      ...result,
+      message:
+        "Nova senha provisória gerada. Entregue as credenciais ao responsável.",
+    });
+  } catch (error) {
+    sendError(res, error);
+  }
+});
+
+// Excluir instituição
+adminRouter.delete("/institutions/:id", async (req, res) => {
+  const id = institutionIdSchema.safeParse(req.params.id);
+
+  if (!id.success) {
+    res.status(400).json({
+      message: "Informe um id válido para a instituição.",
+    });
+    return;
+  }
+
+  try {
+    const removed = await institutionService.deleteInstitution(id.data);
+    res.json({
+      ...removed,
+      message: "Instituição excluída com sucesso.",
+    });
+  } catch (error) {
+    sendError(res, error);
+  }
+});
+
 // Desativar avaliação por moderação administrativa
 adminRouter.delete("/reviews/:id", async (req, res) => {
   const params = paramsSchema.safeParse(req.params);
@@ -190,6 +238,33 @@ adminRouter.get("/contacts", async (_req, res) => {
   try {
     const contacts = await listContactMessages();
     res.json(contacts);
+  } catch (error) {
+    sendError(res, error);
+  }
+});
+
+const contactStatusSchema = z.object({
+  status: z.enum(["PENDING", "ANSWERED"]),
+});
+
+// Atualizar status da mensagem de contato
+adminRouter.patch("/contacts/:id/status", async (req, res) => {
+  const params = paramsSchema.safeParse(req.params);
+  const body = contactStatusSchema.safeParse(req.body);
+
+  if (!params.success || !body.success) {
+    res.status(400).json({
+      message: "Informe um id válido e o status da mensagem.",
+    });
+    return;
+  }
+
+  try {
+    const updated = await updateContactMessageStatus(
+      params.data.id,
+      body.data.status,
+    );
+    res.json(updated);
   } catch (error) {
     sendError(res, error);
   }

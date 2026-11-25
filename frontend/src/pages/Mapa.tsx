@@ -105,7 +105,11 @@ function AjustarEnquadramento({
   return null
 }
 
-function Mapa() {
+interface MapaProps {
+  embedded?: boolean
+}
+
+function Mapa({ embedded = false }: MapaProps) {
   const [instituicoes, setInstituicoes] = useState<InstituicaoMapa[]>([])
   const [estado, setEstado] = useState<Estado>('carregando')
   const [visualizacao, setVisualizacao] = useState<Visualizacao>('mapa')
@@ -141,39 +145,53 @@ function Mapa() {
   )
 
   return (
-    <section className="mapa-page" aria-labelledby="mapa-titulo">
-      <header className="mapa-header">
-        <h1 id="mapa-titulo">Mapa de instituições</h1>
-        <p>
-          Veja onde ficam as instituições cadastradas e escolha uma para
-          conhecer os recursos de acessibilidade.
-        </p>
-      </header>
+    <section
+      className={`mapa-page ${embedded ? 'mapa-page-embedded' : ''}`}
+      aria-labelledby="mapa-titulo"
+    >
+      <div className={embedded ? 'mapa-embedded-grid' : undefined}>
+        <div className={embedded ? 'mapa-embedded-info' : undefined}>
+          <header className="mapa-header">
+            {embedded ? (
+              <h2 id="mapa-titulo">Mapa de instituições</h2>
+            ) : (
+              <h1 id="mapa-titulo">Mapa de instituições</h1>
+            )}
+            <p>
+              Veja onde ficam as instituições cadastradas e escolha uma para
+              conhecer os recursos de acessibilidade.
+            </p>
+          </header>
 
-      <div
-        className="mapa-alternar"
-        role="group"
-        aria-label="Forma de visualização"
-      >
-        <button
-          type="button"
-          className="mapa-alternar-botao"
-          aria-pressed={visualizacao === 'mapa'}
-          onClick={() => setVisualizacao('mapa')}
-        >
-          <MapIcon aria-hidden="true" size={18} />
-          Visualização em mapa
-        </button>
-        <button
-          type="button"
-          className="mapa-alternar-botao"
-          aria-pressed={visualizacao === 'lista'}
-          onClick={() => setVisualizacao('lista')}
-        >
-          <List aria-hidden="true" size={18} />
-          Visualização em lista
-        </button>
-      </div>
+          {!embedded && (
+            <div
+              className="mapa-alternar"
+              role="group"
+              aria-label="Forma de visualização"
+            >
+              <button
+                type="button"
+                className="mapa-alternar-botao"
+                aria-pressed={visualizacao === 'mapa'}
+                onClick={() => setVisualizacao('mapa')}
+              >
+                <MapIcon aria-hidden="true" size={18} />
+                Visualização em mapa
+              </button>
+              <button
+                type="button"
+                className="mapa-alternar-botao"
+                aria-pressed={visualizacao === 'lista'}
+                onClick={() => setVisualizacao('lista')}
+              >
+                <List aria-hidden="true" size={18} />
+                Visualização em lista
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className={embedded ? 'mapa-embedded-conteudo' : undefined}>
 
       {estado === 'carregando' && (
         <p className="mapa-mensagem" role="status">
@@ -215,8 +233,8 @@ function Mapa() {
               aria-label="Mapa com a localização das instituições. Use a visualização em lista para uma alternativa em texto."
             >
               <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">Colaboradores do OpenStreetMap</a>'
-                url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; Google Maps'
+                url="https://mt1.google.com/vt/lyrs=m&hl=pt-BR&x={x}&y={y}&z={z}"
               />
               <AjustarEnquadramento instituicoes={comLocalizacao} />
 
@@ -236,7 +254,7 @@ function Mapa() {
                       <p>{resumir(instituicao.description)}</p>
                       <Link
                         className="mapa-botao"
-                        to={`/instituicao/${instituicao.id}`}
+                        to={`/instituicoes/${instituicao.id}`}
                       >
                         Ver detalhes
                         <span className="sr-only">
@@ -266,7 +284,7 @@ function Mapa() {
                   <p>{resumir(instituicao.description)}</p>
                   <Link
                     className="mapa-botao"
-                    to={`/instituicao/${instituicao.id}`}
+                    to={`/instituicoes/${instituicao.id}`}
                   >
                     Ver detalhes
                     <span className="sr-only"> de {instituicao.name}</span>
@@ -276,6 +294,8 @@ function Mapa() {
             ))}
           </ul>
         )}
+        </div>
+      </div>
     </section>
   )
 }

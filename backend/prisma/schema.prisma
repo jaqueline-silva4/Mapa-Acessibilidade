@@ -102,18 +102,24 @@ model AccessibilityImage {
 model Institution {
   id          Int      @id @default(autoincrement())
   name        String
+  unitName    String?
   cnpj        String   @unique
   phone       String
   email       String
-  description String   @db.Text
-  street      String
-  number      String
-  neighborhood String
-  city        String
-  state       String
-  zipCode     String
-  latitude    Float
-  longitude   Float
+  description  String   @db.Text
+  street       String?
+  number       String?
+  neighborhood String?
+  city         String?
+  state        String?
+  zipCode      String?
+  latitude     Float?
+  longitude    Float?
+  logoUrl      String?
+  coverUrl     String?
+  floorPlanUrl String?
+  floorPlanAlt String?
+  customDomain String?  @unique
   active      Boolean  @default(true)
   userId      Int      @unique
   createdAt   DateTime @default(now())

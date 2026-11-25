@@ -23,6 +23,10 @@ export const institutionPointsRouter = Router();
 // A autenticação vem antes do upload, para não gravar arquivo de quem não está logado.
 institutionPointsRouter.use(authenticate, requirePasswordChanged, authorize("INSTITUTION"));
 
+institutionPointsRouter.get("/", async (req, res) => {
+  res.json(await service.listInstitutionPoints(institutionIdOf(req)));
+});
+
 institutionPointsRouter.post("/", uploadPointImages, async (req, res) => {
   const files = uploadedFiles(req);
   try {

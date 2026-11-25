@@ -74,12 +74,34 @@ function validarFormulario(formulario: Formulario): ErrosFormulario {
   return erros;
 }
 
-function Contato() {
+export function ContatoMotivos() {
+  return (
+    <section
+      className="contato-motivos"
+      aria-label="Motivos para entrar em contato"
+    >
+      {motivos.map(({ icone: Icone, titulo, descricao }) => (
+        <article className="contato-motivo" key={titulo}>
+          <div className="contato-motivo-icone">
+            <Icone size={24} strokeWidth={1.8} aria-hidden="true" />
+          </div>
+
+          <h2>{titulo}</h2>
+
+          <p>{descricao}</p>
+        </article>
+      ))}
+    </section>
+  );
+}
+
+export function ContatoFormulario() {
   const [formulario, setFormulario] =
     useState<Formulario>(formularioInicial);
 
   const [erros, setErros] = useState<ErrosFormulario>({});
   const [status, setStatus] = useState("");
+  const [enviando, setEnviando] = useState(false);
 
   function atualizarCampo(campo: keyof Formulario, valor: string) {
     setFormulario((anterior) => ({
@@ -95,7 +117,7 @@ function Contato() {
     setStatus("");
   }
 
-  function enviarFormulario(event: SubmitEvent<HTMLFormElement>) {
+  async function enviarFormulario(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const novosErros = validarFormulario(formulario);
@@ -106,14 +128,195 @@ function Contato() {
       return;
     }
 
-    // O envio ao backend será implementado posteriormente.
-    setStatus(
-      "Formulário validado com sucesso! O envio da mensagem ainda precisa ser conectado ao servidor."
-    );
+    setEnviando(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          reason: "QUESTION",
+          name: formulario.nome.trim(),
+          email: formulario.email.trim(),
+          message: `[${formulario.assunto}] ${formulario.mensagem.trim()}`,
+        }),
+      });
 
-    setFormulario(formularioInicial);
-    setErros({});
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Não foi possível enviar sua mensagem."
+        );
+      }
+
+      setStatus("Mensagem enviada com sucesso! Obrigado pelo contato.");
+      setFormulario(formularioInicial);
+      setErros({});
+    } catch (error) {
+      setStatus(
+        error instanceof Error
+          ? error.message
+          : "Não foi possível enviar sua mensagem."
+      );
+    } finally {
+      setEnviando(false);
+    }
   }
+
+  return (
+    <section className="contato-form-card">
+      <header className="contato-form-cabecalho">
+        <div className="contato-form-icone">
+          <Mail size={24} strokeWidth={1.8} aria-hidden="true" />
+        </div>
+
+        <div>
+          <h2>Envie sua mensagem</h2>
+          <p>
+            Preencha os campos abaixo e responderemos em breve.
+          </p>
+        </div>
+      </header>
+
+      <form
+        className="contato-formulario"
+        onSubmit={enviarFormulario}
+        noValidate
+      >
+        <div className="contato-campo">
+          <label htmlFor="contato-nome">Nome</label>
+
+          <input
+            id="contato-nome"
+            name="nome"
+            type="text"
+            autoComplete="name"
+            value={formulario.nome}
+            onChange={(event) =>
+              atualizarCampo("nome", event.target.value)
+            }
+            maxLength={100}
+            aria-invalid={Boolean(erros.nome)}
+            aria-describedby={
+              erros.nome ? "erro-contato-nome" : undefined
+            }
+          />
+
+          {erros.nome && (
+            <span className="contato-erro" id="erro-contato-nome">
+              {erros.nome}
+            </span>
+          )}
+        </div>
+
+        <div className="contato-campo">
+          <label htmlFor="contato-email">E-mail</label>
+
+          <input
+            id="contato-email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            value={formulario.email}
+            onChange={(event) =>
+              atualizarCampo("email", event.target.value)
+            }
+            maxLength={255}
+            aria-invalid={Boolean(erros.email)}
+            aria-describedby={
+              erros.email ? "erro-contato-email" : undefined
+            }
+          />
+
+          {erros.email && (
+            <span className="contato-erro" id="erro-contato-email">
+              {erros.email}
+            </span>
+          )}
+        </div>
+
+        <div className="contato-campo">
+          <label htmlFor="contato-assunto">Assunto</label>
+
+          <select
+            id="contato-assunto"
+            name="assunto"
+            value={formulario.assunto}
+            onChange={(event) =>
+              atualizarCampo("assunto", event.target.value)
+            }
+            aria-invalid={Boolean(erros.assunto)}
+            aria-describedby={
+              erros.assunto ? "erro-contato-assunto" : undefined
+            }
+          >
+            <option value="">Selecione...</option>
+            <option value="Sugerir instituição">
+              Sugerir instituição
+            </option>
+            <option value="Dúvida">Dúvida</option>
+            <option value="Problema no site">
+              Problema no site
+            </option>
+            <option value="Outro">Outro</option>
+          </select>
+
+          {erros.assunto && (
+            <span
+              className="contato-erro"
+              id="erro-contato-assunto"
+            >
+              {erros.assunto}
+            </span>
+          )}
+        </div>
+
+        <div className="contato-campo contato-campo-mensagem">
+          <label htmlFor="contato-mensagem">Mensagem</label>
+
+          <textarea
+            id="contato-mensagem"
+            name="mensagem"
+            rows={5}
+            value={formulario.mensagem}
+            onChange={(event) =>
+              atualizarCampo("mensagem", event.target.value)
+            }
+            maxLength={1000}
+            placeholder="Escreva sua mensagem..."
+            aria-invalid={Boolean(erros.mensagem)}
+            aria-describedby={
+              erros.mensagem
+                ? "erro-contato-mensagem"
+                : undefined
+            }
+          />
+
+          {erros.mensagem && (
+            <span
+              className="contato-erro"
+              id="erro-contato-mensagem"
+            >
+              {erros.mensagem}
+            </span>
+          )}
+        </div>
+
+        {status && (
+          <p className="contato-status" role="status">
+            {status}
+          </p>
+        )}
+
+        <button type="submit" className="contato-enviar" disabled={enviando}>
+          <Send size={17} strokeWidth={1.8} aria-hidden="true" />
+          <span>{enviando ? "Enviando..." : "Enviar mensagem"}</span>
+        </button>
+      </form>
+    </section>
+  );
+}
+
+function Contato() {
 
   return (
     <>
@@ -144,173 +347,9 @@ function Contato() {
 
       <main className="contato-pagina" id="conteudo-principal">
         <div className="contato-container">
-          <section
-            className="contato-motivos"
-            aria-label="Motivos para entrar em contato"
-          >
-            {motivos.map(({ icone: Icone, titulo, descricao }) => (
-              <article className="contato-motivo" key={titulo}>
-                <div className="contato-motivo-icone">
-                  <Icone size={24} strokeWidth={1.8} aria-hidden="true" />
-                </div>
+          <ContatoMotivos />
 
-                <h2>{titulo}</h2>
-
-                <p>{descricao}</p>
-              </article>
-            ))}
-          </section>
-
-          <section className="contato-form-card">
-            <header className="contato-form-cabecalho">
-              <div className="contato-form-icone">
-                <Mail size={24} strokeWidth={1.8} aria-hidden="true" />
-              </div>
-
-              <div>
-                <h2>Envie sua mensagem</h2>
-                <p>
-                  Preencha os campos abaixo e responderemos em breve.
-                </p>
-              </div>
-            </header>
-
-            <form
-              className="contato-formulario"
-              onSubmit={enviarFormulario}
-              noValidate
-            >
-              <div className="contato-campo">
-                <label htmlFor="contato-nome">Nome</label>
-
-                <input
-                  id="contato-nome"
-                  name="nome"
-                  type="text"
-                  autoComplete="name"
-                  value={formulario.nome}
-                  onChange={(event) =>
-                    atualizarCampo("nome", event.target.value)
-                  }
-                  maxLength={100}
-                  aria-invalid={Boolean(erros.nome)}
-                  aria-describedby={
-                    erros.nome ? "erro-contato-nome" : undefined
-                  }
-                />
-
-                {erros.nome && (
-                  <span className="contato-erro" id="erro-contato-nome">
-                    {erros.nome}
-                  </span>
-                )}
-              </div>
-
-              <div className="contato-campo">
-                <label htmlFor="contato-email">E-mail</label>
-
-                <input
-                  id="contato-email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  value={formulario.email}
-                  onChange={(event) =>
-                    atualizarCampo("email", event.target.value)
-                  }
-                  maxLength={255}
-                  aria-invalid={Boolean(erros.email)}
-                  aria-describedby={
-                    erros.email ? "erro-contato-email" : undefined
-                  }
-                />
-
-                {erros.email && (
-                  <span className="contato-erro" id="erro-contato-email">
-                    {erros.email}
-                  </span>
-                )}
-              </div>
-
-              <div className="contato-campo">
-                <label htmlFor="contato-assunto">Assunto</label>
-
-                <select
-                  id="contato-assunto"
-                  name="assunto"
-                  value={formulario.assunto}
-                  onChange={(event) =>
-                    atualizarCampo("assunto", event.target.value)
-                  }
-                  aria-invalid={Boolean(erros.assunto)}
-                  aria-describedby={
-                    erros.assunto ? "erro-contato-assunto" : undefined
-                  }
-                >
-                  <option value="">Selecione...</option>
-                  <option value="Sugerir instituição">
-                    Sugerir instituição
-                  </option>
-                  <option value="Dúvida">Dúvida</option>
-                  <option value="Problema no site">
-                    Problema no site
-                  </option>
-                  <option value="Outro">Outro</option>
-                </select>
-
-                {erros.assunto && (
-                  <span
-                    className="contato-erro"
-                    id="erro-contato-assunto"
-                  >
-                    {erros.assunto}
-                  </span>
-                )}
-              </div>
-
-              <div className="contato-campo contato-campo-mensagem">
-                <label htmlFor="contato-mensagem">Mensagem</label>
-
-                <textarea
-                  id="contato-mensagem"
-                  name="mensagem"
-                  rows={5}
-                  value={formulario.mensagem}
-                  onChange={(event) =>
-                    atualizarCampo("mensagem", event.target.value)
-                  }
-                  maxLength={1000}
-                  placeholder="Escreva sua mensagem..."
-                  aria-invalid={Boolean(erros.mensagem)}
-                  aria-describedby={
-                    erros.mensagem
-                      ? "erro-contato-mensagem"
-                      : undefined
-                  }
-                />
-
-                {erros.mensagem && (
-                  <span
-                    className="contato-erro"
-                    id="erro-contato-mensagem"
-                  >
-                    {erros.mensagem}
-                  </span>
-                )}
-              </div>
-
-              {status && (
-                <p className="contato-status" role="status">
-                  {status}
-                </p>
-              )}
-
-              <button type="submit" className="contato-enviar">
-                <Send size={17} strokeWidth={1.8} aria-hidden="true" />
-                <span>Enviar mensagem</span>
-              </button>
-            </form>
-          </section>
+          <ContatoFormulario />
         </div>
       </main>
     </>

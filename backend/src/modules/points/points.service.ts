@@ -62,6 +62,14 @@ function newImages(files: Express.Multer.File[], altTexts: string[]) {
 
 // ---------- rotas da instituição ----------
 
+export async function listInstitutionPoints(institutionId: number) {
+  return prisma.accessibilityPoint.findMany({
+    where: { institutionId },
+    include: pointInclude,
+    orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+  });
+}
+
 export async function createPoint(
   institutionId: number,
   input: CreatePointInput,

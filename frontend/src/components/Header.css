@@ -8,7 +8,7 @@
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 24px;
-  padding: 14px 5.7%;
+  padding: 14px max(24px, calc((100% - 1200px) / 2));
   background-color: #ffffff;
   border-bottom: 1px solid #e5eaf0;
 }
@@ -17,38 +17,74 @@
   display: flex;
   align-items: center;
   justify-self: start;
-  margin-left: 95px;
+  margin-left: 0;
   text-decoration: none;
 }
 
 .header-logo {
   display: block;
-  width: calc(130px * var(--font-scale, 1));
+  width: auto;
   max-width: 100%;
-  max-height: calc(48px * var(--font-scale, 1));
+  height: calc(48px * var(--font-scale, 1));
   object-fit: contain;
+  object-position: left center;
+}
+
+.header-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 10px;
+  margin-right: 0;
+}
+
+.header-admin-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 24px;
+  background-color: #e8f4fc;
+  color: #0b4f82;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-admin-link:hover {
+  background-color: #d4ebfa;
+}
+
+.header-user {
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: inherit;
 }
 
 .header-login {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  justify-self: end;
   min-width: 85px;
   min-height: 40px;
-  margin-right: 95px;
   padding: 8px 20px;
+  border: none;
   border-radius: 24px;
-  background-color: #071d33;
+  background-color: #0b78c2;
   color: #ffffff;
   font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .header-login:hover {
-  background-color: #123b60;
+  background-color: #085f9b;
 }
 
 .header-brand:focus-visible,
@@ -69,9 +105,10 @@
     grid-row: 1;
   }
 
-  .header-login {
+  .header-actions {
     grid-column: 2;
     grid-row: 1;
+    margin-right: 0;
   }
 
   .header nav {
@@ -122,10 +159,15 @@
     overflow-wrap: anywhere;
   }
 
-  .header-login {
+  .header-actions {
     align-self: center;
     justify-self: auto;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-right: 0;
+  }
+
+  .header-login {
     min-height: 44px;
     max-width: 100%;
     box-sizing: border-box;

@@ -78,10 +78,11 @@ export default function AccessibilityBar({
 
   return (
     <div className="accessibility-bar">
-      <nav
-        className="accessibility-shortcuts"
-        aria-label="Atalhos de navegação"
-      >
+      <div className="accessibility-bar-inner">
+        <nav
+          className="accessibility-shortcuts"
+          aria-label="Atalhos de navegação"
+        >
         <a href="#conteudo-principal">
           Ir para o conteúdo [1]
         </a>
@@ -162,6 +163,7 @@ export default function AccessibilityBar({
         >
           {tema === 'escuro' ? '☼ Tema claro' : '☾ Tema escuro'}
         </button>
+        </div>
       </div>
     </div>
   )

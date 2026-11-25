@@ -2,6 +2,7 @@
 import "./FAQ.css";
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
 
 import {
@@ -16,6 +17,7 @@ import {
   Settings,
   Layers,
   CirclePlus,
+  Search,
 } from "lucide-react";
 
 type Categoria =
@@ -51,28 +53,28 @@ const perguntas: Pergunta[] = [
     categoria: "Cadastro",
     pergunta: "Preciso criar conta para usar?",
     resposta:
-      "Você pode consultar as informações disponíveis na plataforma sem criar uma conta. Para utilizar funcionalidades que exigem identificação, como avaliar instituições, é necessário entrar ou criar uma conta.",
+      "Não. Qualquer pessoa pode buscar instituições, visualizar o mapa de localização, consultar recursos de acessibilidade e enviar mensagens pelo Fale Conosco sem precisar criar conta. O acesso por login é exclusivo para administradores e responsáveis pelas instituições cadastradas.",
   },
   {
     id: 3,
     categoria: "Avaliações",
     pergunta: "Como avalio uma instituição?",
     resposta:
-      "Acesse a página da instituição que deseja avaliar e procure a opção de avaliação. Você poderá compartilhar sua experiência com os recursos de acessibilidade do local. A avaliação exige uma conta.",
+      "Acesse a página pública da instituição desejada e consulte as avaliações e recursos de acessibilidade disponíveis. O sistema exibe a média de 0 a 5 estrelas e comentários sobre a acessibilidade do local.",
   },
   {
     id: 4,
     categoria: "Mapa",
     pergunta: "Como encontro locais perto de mim?",
     resposta:
-      "Acesse a seção Mapa para explorar as instituições cadastradas e consultar as informações de acessibilidade disponíveis. Quando houver suporte à localização, você poderá utilizá-la para facilitar a busca por locais próximos.",
+      "Na página inicial você pode filtrar as instituições cadastradas por nome, estado ou cidade e explorar o Mapa de instituições interativo para ver onde cada espaço está localizado.",
   },
   {
     id: 5,
     categoria: "Instituições",
     pergunta: "Como cadastro minha instituição?",
     resposta:
-      "Entre em contato pelo botão Fale conosco e nossa equipe fará o cadastro. Essa medida é necessária para a validação da instituição pela plataforma.",
+      "Acesse a página Solicitar cadastro (pelo botão 'Quero cadastrar minha instituição' na página inicial) e informe os dados da sua instituição. Nossa equipe administrativa analisará o pedido e enviará as credenciais de acesso.",
   },
   {
     id: 6,
@@ -119,15 +121,21 @@ function Icone({ nome, tamanho = 18 }: IconeProps) {
 function FAQ() {
   const [categoriaSelecionada, setCategoriaSelecionada] =
     useState<Categoria | "Todas">("Todas");
-
+  const [busca, setBusca] = useState("");
   const [perguntaAberta, setPerguntaAberta] = useState<number | null>(1);
 
-  const perguntasFiltradas =
-    categoriaSelecionada === "Todas"
-      ? perguntas
-      : perguntas.filter(
-          (item) => item.categoria === categoriaSelecionada,
-        );
+  const termoBusca = busca.trim().toLowerCase();
+
+  const perguntasFiltradas = perguntas.filter((item) => {
+    const matchCategoria =
+      categoriaSelecionada === "Todas" ||
+      item.categoria === categoriaSelecionada;
+    const matchBusca =
+      termoBusca === "" ||
+      item.pergunta.toLowerCase().includes(termoBusca) ||
+      item.resposta.toLowerCase().includes(termoBusca);
+    return matchCategoria && matchBusca;
+  });
 
   const quantidadePorCategoria = (categoria: Categoria | "Todas") => {
     if (categoria === "Todas") {
@@ -247,10 +255,10 @@ function FAQ() {
 
                 <p>Fale com o nosso suporte.</p>
 
-                <a className="faq-botao-suporte" href="/contato">
+                <Link className="faq-botao-suporte" to="/#contato-home">
                   <Icone nome="email" />
                   <span>Fale conosco</span>
-                </a>
+                </Link>
               </div>
             </aside>
 
@@ -258,6 +266,19 @@ function FAQ() {
               className="faq-lista"
               aria-label="Perguntas frequentes"
             >
+              <div className="faq-busca">
+                <Search size={16} strokeWidth={1.8} aria-hidden="true" />
+                <label htmlFor="faq-busca-input" className="faq-somente-leitor">
+                  Buscar pergunta no FAQ
+                </label>
+                <input
+                  id="faq-busca-input"
+                  type="search"
+                  placeholder="Buscar pergunta ou palavra-chave..."
+                  value={busca}
+                  onChange={(e) => setBusca(e.target.value)}
+                />
+              </div>
               {perguntasFiltradas.map((item) => {
                 const aberta = perguntaAberta === item.id;
                 const respostaId = `faq-resposta-${item.id}`;

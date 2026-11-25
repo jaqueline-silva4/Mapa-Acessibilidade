@@ -1,10 +1,11 @@
 import type { Response } from "express";
+import { AppError } from "../lib/errors.js";
 import { AuthError } from "../services/auth.service.js";
 
-// Erros previstos (AuthError) viram a resposta HTTP deles; o resto vira 500 genérico,
+// Erros previstos (AuthError/AppError) viram a resposta HTTP deles; o resto vira 500 genérico,
 // sem vazar detalhes internos (o erro real vai só para o log).
 export function sendError(res: Response, error: unknown): void {
-  if (error instanceof AuthError) {
+  if (error instanceof AuthError || error instanceof AppError) {
     res.status(error.status).json({ message: error.message });
     return;
   }
