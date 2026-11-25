@@ -55,6 +55,8 @@ export const ModelName = {
   PasswordResetToken: 'PasswordResetToken',
   AccessibilityCategory: 'AccessibilityCategory',
   AccessibilityPoint: 'AccessibilityPoint',
+  CampusBlock: 'CampusBlock',
+  CampusRoom: 'CampusRoom',
   AccessibilityImage: 'AccessibilityImage',
   Institution: 'Institution',
   Review: 'Review',
@@ -126,11 +128,47 @@ export const AccessibilityPointScalarFieldEnum = {
   description: 'description',
   active: 'active',
   reportCount: 'reportCount',
+  mapBlockId: 'mapBlockId',
+  mapX: 'mapX',
+  mapY: 'mapY',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type AccessibilityPointScalarFieldEnum = (typeof AccessibilityPointScalarFieldEnum)[keyof typeof AccessibilityPointScalarFieldEnum]
+
+
+export const CampusBlockScalarFieldEnum = {
+  id: 'id',
+  institutionId: 'institutionId',
+  name: 'name',
+  subtitle: 'subtitle',
+  x: 'x',
+  y: 'y',
+  width: 'width',
+  height: 'height',
+  color: 'color',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CampusBlockScalarFieldEnum = (typeof CampusBlockScalarFieldEnum)[keyof typeof CampusBlockScalarFieldEnum]
+
+
+export const CampusRoomScalarFieldEnum = {
+  id: 'id',
+  blockId: 'blockId',
+  name: 'name',
+  roomType: 'roomType',
+  x: 'x',
+  y: 'y',
+  width: 'width',
+  height: 'height',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CampusRoomScalarFieldEnum = (typeof CampusRoomScalarFieldEnum)[keyof typeof CampusRoomScalarFieldEnum]
 
 
 export const AccessibilityImageScalarFieldEnum = {
@@ -272,6 +310,23 @@ export const AccessibilityPointOrderByRelevanceFieldEnum = {
 } as const
 
 export type AccessibilityPointOrderByRelevanceFieldEnum = (typeof AccessibilityPointOrderByRelevanceFieldEnum)[keyof typeof AccessibilityPointOrderByRelevanceFieldEnum]
+
+
+export const CampusBlockOrderByRelevanceFieldEnum = {
+  name: 'name',
+  subtitle: 'subtitle',
+  color: 'color'
+} as const
+
+export type CampusBlockOrderByRelevanceFieldEnum = (typeof CampusBlockOrderByRelevanceFieldEnum)[keyof typeof CampusBlockOrderByRelevanceFieldEnum]
+
+
+export const CampusRoomOrderByRelevanceFieldEnum = {
+  name: 'name',
+  roomType: 'roomType'
+} as const
+
+export type CampusRoomOrderByRelevanceFieldEnum = (typeof CampusRoomOrderByRelevanceFieldEnum)[keyof typeof CampusRoomOrderByRelevanceFieldEnum]
 
 
 export const AccessibilityImageOrderByRelevanceFieldEnum = {

@@ -15,6 +15,7 @@ import Acessibilidade from './pages/Acessibilidade'
 import Contato from './pages/Contato'
 import AdminInstituicoes from './pages/AdminInstituicoes'
 import InstituicaoConfiguracoes from './pages/InstituicaoConfiguracoes'
+import InstituicaoMapaInterativo from './pages/InstituicaoMapaInterativo'
 import InstituicaoPublica from './pages/InstituicaoPublica'
 import SolicitarCadastro from './pages/SolicitarCadastro'
 
@@ -45,6 +46,10 @@ function App() {
           <Route
             path="/instituicao/configuracoes"
             element={<InstituicaoConfiguracoes />}
+          />
+          <Route
+            path="/instituicao/mapa-interativo"
+            element={<InstituicaoMapaInterativo />}
           />
         </Routes>
       </BrowserRouter>

@@ -74,9 +74,18 @@
   flex: 1;
 }
 
+.inst-config--full {
+  padding: 18px 24px 32px;
+}
+
 .inst-config-container {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.inst-config-container--full {
+  max-width: none;
+  width: 100%;
 }
 
 .public-link-card {

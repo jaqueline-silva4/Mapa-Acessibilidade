@@ -1,0 +1,104 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mapa-acessibilidade-mysql-prod
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME:-mapa_acessibilidade}
+    volumes:
+      - mysql_prod_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+      start_period: 15s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: mapa-acessibilidade-backend-prod
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: ${DB_ROOT_PASSWORD}
+      DB_NAME: ${DB_NAME:-mapa_acessibilidade}
+      DATABASE_URL: mysql://root:${DB_ROOT_PASSWORD}@mysql:3306/${DB_NAME:-mapa_acessibilidade}?allowPublicKeyRetrieval=true
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-1h}
+      FRONTEND_URL: https://${DOMAIN}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      MAIL_FROM: ${MAIL_FROM:-Acessa+ <nao-responder@exemplo.com>}
+    volumes:
+      - uploads_prod_data:/app/uploads
+
+  nginx:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mapa-acessibilidade-nginx-prod
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - certbot_www:/var/www/certbot
+      - certbot_conf:/etc/letsencrypt
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: mapa-acessibilidade-certbot-prod
+    restart: unless-stopped
+    depends_on:
+      - nginx
+    environment:
+      DOMAIN: ${DOMAIN}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+      LETSENCRYPT_STAGING: ${LETSENCRYPT_STAGING:-0}
+    volumes:
+      - certbot_www:/var/www/certbot
+      - certbot_conf:/etc/letsencrypt
+    entrypoint: >
+      /bin/sh -c '
+      trap exit TERM;
+      sleep 10;
+      STAGING_ARG="";
+      if [ "$$LETSENCRYPT_STAGING" = "1" ]; then
+        STAGING_ARG="--staging";
+      fi;
+      if [ ! -f "/etc/letsencrypt/renewal/$${DOMAIN}.conf" ]; then
+        echo "Solicitando certificado Let'\''s Encrypt para $${DOMAIN}...";
+        rm -rf "/etc/letsencrypt/live/$${DOMAIN}" "/etc/letsencrypt/archive/$${DOMAIN}";
+        certbot certonly --webroot -w /var/www/certbot $$STAGING_ARG \
+          -d "$${DOMAIN}" \
+          --email "$${LETSENCRYPT_EMAIL}" \
+          --agree-tos --no-eff-email --non-interactive --force-renewal || true;
+      fi;
+      while :; do
+        certbot renew --webroot -w /var/www/certbot --quiet || true;
+        sleep 12h;
+      done
+      '
+
+volumes:
+  mysql_prod_data:
+  uploads_prod_data:
+  certbot_www:
+  certbot_conf:

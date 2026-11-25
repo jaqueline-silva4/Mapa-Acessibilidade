@@ -90,7 +90,7 @@ function InstituicaoConfiguracoes() {
   const navigate = useNavigate();
 
   const [institutionId, setInstitutionId] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState<"profile" | "resources">(
+  const [activeTab, setActiveTab] = useState<"profile" | "resources" | "map">(
     "profile"
   );
   const [form, setForm] = useState<ProfileFormState>(INITIAL_STATE);
@@ -471,58 +471,70 @@ function InstituicaoConfiguracoes() {
         </div>
       </header>
 
-      <main className="inst-config">
-        <div className="inst-config-container">
-          <div className="inst-config-cabecalho">
-            <div>
-              <span className="inst-config-badge">Painel da Instituição</span>
-              <h1>Personalize sua página pública</h1>
-              <p>
-                Gerencie identidade visual, informações de contato, endereço e
-                localização exata no mapa.
-              </p>
-            </div>
-          </div>
+      <main
+        className={`inst-config ${activeTab === "map" ? "inst-config--full" : ""}`}
+      >
+        <div
+          className={`inst-config-container ${activeTab === "map" ? "inst-config-container--full" : ""}`}
+        >
+          {activeTab !== "map" && (
+            <>
+              <div className="inst-config-cabecalho">
+                <div>
+                  <span className="inst-config-badge">
+                    Painel da Instituição
+                  </span>
+                  <h1>Personalize sua página pública</h1>
+                  <p>
+                    Gerencie identidade visual, informações de contato, endereço
+                    e localização exata no mapa.
+                  </p>
+                </div>
+              </div>
 
-          {publicFullUrl && (
-            <div className="public-link-card">
-              <div className="public-link-info">
-                <span className="public-link-rotulo">
-                  Link da sua página pública
-                </span>
-                <a
-                  className="public-link-url"
-                  href={publicPath!}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {publicFullUrl}
-                </a>
-              </div>
-              <div className="public-link-botoes">
-                <button
-                  type="button"
-                  className="btn-copiar-link"
-                  onClick={handleCopyPublicUrl}
-                >
-                  {copiedPublicLink ? (
-                    <Check size={15} aria-hidden="true" />
-                  ) : (
-                    <Copy size={15} aria-hidden="true" />
-                  )}
-                  <span>{copiedPublicLink ? "Copiado!" : "Copiar link"}</span>
-                </button>
-                <a
-                  className="btn-abrir-link"
-                  href={publicPath!}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ExternalLink size={15} aria-hidden="true" />
-                  <span>Visualizar página</span>
-                </a>
-              </div>
-            </div>
+              {publicFullUrl && (
+                <div className="public-link-card">
+                  <div className="public-link-info">
+                    <span className="public-link-rotulo">
+                      Link da sua página pública
+                    </span>
+                    <a
+                      className="public-link-url"
+                      href={publicPath!}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {publicFullUrl}
+                    </a>
+                  </div>
+                  <div className="public-link-botoes">
+                    <button
+                      type="button"
+                      className="btn-copiar-link"
+                      onClick={handleCopyPublicUrl}
+                    >
+                      {copiedPublicLink ? (
+                        <Check size={15} aria-hidden="true" />
+                      ) : (
+                        <Copy size={15} aria-hidden="true" />
+                      )}
+                      <span>
+                        {copiedPublicLink ? "Copiado!" : "Copiar link"}
+                      </span>
+                    </button>
+                    <a
+                      className="btn-abrir-link"
+                      href={publicPath!}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLink size={15} aria-hidden="true" />
+                      <span>Visualizar página</span>
+                    </a>
+                  </div>
+                </div>
+              )}
+            </>
           )}
 
           <div className="inst-config-tabs" role="tablist" aria-label="Seções de configuração">
@@ -545,6 +557,17 @@ function InstituicaoConfiguracoes() {
             >
               <Accessibility size={16} aria-hidden="true" />
               <span>Recursos de Acessibilidade</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={false}
+              className="inst-config-tab"
+              onClick={() => navigate("/instituicao/mapa-interativo")}
+            >
+              <MapIcon size={16} aria-hidden="true" />
+              <span>Mapa Interativo (Planta)</span>
+              <ExternalLink size={13} aria-hidden="true" />
             </button>
           </div>
 

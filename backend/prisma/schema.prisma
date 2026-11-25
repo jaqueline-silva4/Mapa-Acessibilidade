@@ -74,16 +74,58 @@ model AccessibilityPoint {
   active        Boolean  @default(false)
   // RN13: contador de denúncias (>= 3 => "em verificação" na página pública).
   reportCount   Int      @default(0)
+  // Posicionamento opcional no mapa interativo (campus ou dentro de um bloco).
+  mapBlockId    Int?
+  mapX          Float?
+  mapY          Float?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
   institution User                  @relation(fields: [institutionId], references: [id], onDelete: Cascade)
   category    AccessibilityCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  mapBlock    CampusBlock?          @relation(fields: [mapBlockId], references: [id], onDelete: SetNull)
   images      AccessibilityImage[]
 
   // Atende o filtro por checklist (RNF20: resposta em até 3 s).
   @@index([institutionId, active, categoryId])
   @@index([categoryId])
+  @@index([mapBlockId])
+}
+
+model CampusBlock {
+  id            Int      @id @default(autoincrement())
+  institutionId Int
+  name          String
+  subtitle      String?
+  x             Float
+  y             Float
+  width         Float
+  height        Float
+  color         String   @default("#0b78c2")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  rooms  CampusRoom[]
+  points AccessibilityPoint[]
+
+  @@index([institutionId])
+}
+
+model CampusRoom {
+  id        Int      @id @default(autoincrement())
+  blockId   Int
+  name      String
+  roomType  String   @default("room")
+  x         Float
+  y         Float
+  width     Float
+  height    Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  block CampusBlock @relation(fields: [blockId], references: [id], onDelete: Cascade)
+
+  @@index([blockId])
 }
 
 model AccessibilityImage {

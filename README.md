@@ -8,10 +8,12 @@ Projeto fullstack para mapeamento e consulta de acessibilidade urbana, composto 
 
 ```text
 Mapa-Acessibilidade/
-├── backend/            # API REST (Node.js, Express, TypeScript, Prisma ORM 7)
-├── frontend/           # Interface Web (React 19, TypeScript, Vite)
-├── docker-compose.yml  # Orquestração do banco de dados MySQL 8.0
-└── README.md           # Documentação geral do projeto
+├── backend/              # API REST (Node.js, Express, TypeScript, Prisma ORM 7)
+├── frontend/             # Interface Web (React 19, TypeScript, Vite)
+├── docker-compose.yml    # Orquestração do banco de dados MySQL 8.0 (desenvolvimento local)
+├── docker-compose.prod.yml # Stack completa de produção (MySQL, Backend, Nginx + Let's Encrypt)
+├── DEPLOY.md             # Guia completo de configuração de VPS, Docker, Git/SSH e deploy
+└── README.md             # Documentação geral do projeto
 ```
 
 ---

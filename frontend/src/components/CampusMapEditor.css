@@ -1,0 +1,426 @@
+.campus-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.campus-editor-topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #ffffff;
+  border: 1px solid #d8e5f0;
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+
+.campus-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 0.84rem;
+  color: #51687e;
+}
+
+.campus-crumb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #c5d9ea;
+  background: #f4f8fc;
+  color: #0b4f82;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.campus-crumb-btn.ativo {
+  background: #0b78c2;
+  border-color: #0b78c2;
+  color: #ffffff;
+}
+
+.campus-crumb-atual {
+  font-weight: 800;
+  color: #071d33;
+}
+
+.campus-editor-topo h2 {
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+  color: #071d33;
+}
+
+.campus-editor-topo p {
+  margin: 0;
+  max-width: 680px;
+  color: #41586e;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.campus-editor-acoes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.campus-btn-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #c5d9ea;
+  background: #ffffff;
+  color: #071d33;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.campus-mini-form {
+  background: #ffffff;
+  border: 1px solid #b5cee3;
+  border-radius: 16px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.campus-mini-form-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #0b4f82;
+}
+
+.campus-mini-form select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #c5d9ea;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #071d33;
+  font-size: 0.92rem;
+}
+
+.campus-cores {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #071d33;
+}
+
+.campus-cor-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.campus-cor-btn.ativo {
+  border-color: #071d33;
+  transform: scale(1.15);
+}
+
+.campus-placing-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #e8f4fc;
+  border: 1px solid #8ac4ea;
+  color: #0b4f82;
+  font-size: 0.9rem;
+}
+
+.campus-editor-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 18px;
+  align-items: start;
+}
+
+.campus-canvas-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.campus-canvas {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  height: calc(100vh - 280px);
+  max-height: 780px;
+  border-radius: 16px;
+  border: 2px solid #c5d9ea;
+  background-color: #f8fbfe;
+  background-image:
+    linear-gradient(to right, rgba(11, 79, 130, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 79, 130, 0.06) 1px, transparent 1px);
+  background-size: 5% 8%;
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+.campus-canvas.modo-posicionar {
+  cursor: crosshair;
+  border-color: #0b78c2;
+  box-shadow: 0 0 0 3px rgba(11, 120, 194, 0.16);
+}
+
+.campus-block-box,
+.campus-room-box {
+  position: absolute;
+  border: 2px solid #0b78c2;
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  cursor: grab;
+  overflow: hidden;
+}
+
+.campus-room-box {
+  border-color: #475569;
+  background: rgba(148, 163, 184, 0.16);
+}
+
+.campus-room-box.tipo-restroom {
+  border-color: #db2777;
+  background: rgba(219, 39, 119, 0.12);
+}
+
+.campus-room-box.tipo-reception {
+  border-color: #7c3aed;
+  background: rgba(124, 58, 237, 0.12);
+}
+
+.campus-room-box.tipo-hall {
+  border-color: #ca8a04;
+  background: rgba(234, 179, 8, 0.14);
+}
+
+.campus-room-box.tipo-stairs {
+  border-color: #059669;
+  background: rgba(5, 150, 105, 0.12);
+}
+
+.campus-box-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.campus-box-head strong {
+  font-size: 0.82rem;
+  line-height: 1.2;
+  color: #071d33;
+}
+
+.campus-box-btns {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.campus-box-btns button {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 6px;
+  border: 1px solid rgba(7, 29, 51, 0.15);
+  background: rgba(255, 255, 255, 0.9);
+  color: #071d33;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.campus-box-sub {
+  font-size: 0.72rem;
+  color: #41586e;
+  line-height: 1.25;
+}
+
+.campus-box-meta {
+  margin-top: auto;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #0b4f82;
+}
+
+.campus-resize-handle {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #41586e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: nwse-resize;
+}
+
+.campus-pin-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #0b78c2;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(7, 29, 51, 0.28);
+  cursor: grab;
+  white-space: nowrap;
+}
+
+.campus-canvas-dica {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #51687e;
+}
+
+.campus-sidebar-recursos {
+  background: #ffffff;
+  border: 1px solid #d8e5f0;
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.campus-sidebar-recursos h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #071d33;
+}
+
+.campus-sidebar-vazio {
+  margin: 0;
+  font-size: 0.86rem;
+  color: #41586e;
+  line-height: 1.5;
+}
+
+.campus-sidebar-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 440px;
+  overflow-y: auto;
+}
+
+.campus-sidebar-item {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #d8e5f0;
+  background: #f9fcff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.campus-sidebar-item-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.campus-sidebar-item-info strong {
+  font-size: 0.88rem;
+  color: #071d33;
+}
+
+.campus-sidebar-local {
+  font-size: 0.76rem;
+  color: #51687e;
+  font-weight: 600;
+}
+
+.campus-sidebar-item-acoes {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.recurso-btn-acao.ativo {
+  background: #0b78c2;
+  border-color: #0b78c2;
+  color: #ffffff;
+}
+
+@media (max-width: 960px) {
+  .campus-editor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tema escuro */
+:root[data-theme='escuro'] .campus-editor-topo,
+:root[data-theme='escuro'] .campus-mini-form,
+:root[data-theme='escuro'] .campus-sidebar-recursos {
+  background-color: #12212f;
+  border-color: #35516a;
+}
+
+:root[data-theme='escuro'] .campus-editor-topo h2,
+:root[data-theme='escuro'] .campus-crumb-atual,
+:root[data-theme='escuro'] .campus-sidebar-recursos h3,
+:root[data-theme='escuro'] .campus-sidebar-item-info strong,
+:root[data-theme='escuro'] .campus-box-head strong {
+  color: #e8f0f7;
+}
+
+:root[data-theme='escuro'] .campus-editor-topo p,
+:root[data-theme='escuro'] .campus-canvas-dica,
+:root[data-theme='escuro'] .campus-sidebar-vazio,
+:root[data-theme='escuro'] .campus-sidebar-local,
+:root[data-theme='escuro'] .campus-box-sub {
+  color: #b4c4d3;
+}
+
+:root[data-theme='escuro'] .campus-canvas {
+  background-color: #0b1622;
+  border-color: #35516a;
+}
+
+:root[data-theme='escuro'] .campus-sidebar-item,
+:root[data-theme='escuro'] .campus-mini-form select,
+:root[data-theme='escuro'] .campus-btn-voltar {
+  background-color: #0b1622;
+  border-color: #35516a;
+  color: #e8f0f7;
+}

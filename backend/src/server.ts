@@ -8,6 +8,10 @@ import { authRouter } from "./routes/auth.routes.js";
 import path from "node:path";
 import { categoriesRouter, institutionPointsRouter, publicPointsRouter } from "./modules/points/points.routes.js";
 import {
+  institutionCampusMapRouter,
+  publicCampusMapRouter,
+} from "./modules/campus-map/campus-map.routes.js";
+import {
   institutionProfileRouter,
   publicInstitutionsRouter,
 } from "./modules/institutions/institutions.routes.js";
@@ -24,7 +28,9 @@ app.use("/api/auth", authRouter);
 app.use("/uploads", express.static(path.resolve(process.cwd(), "uploads")));
 app.use("/api/institution/profile", institutionProfileRouter);
 app.use("/api/institution/points", institutionPointsRouter);
+app.use("/api/institution/campus-map", institutionCampusMapRouter);
 app.use("/api/institutions", publicPointsRouter);
+app.use("/api/institutions", publicCampusMapRouter);
 app.use("/api/accessibility-categories", categoriesRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/institutions", publicInstitutionsRouter);

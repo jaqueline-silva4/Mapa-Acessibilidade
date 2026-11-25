@@ -7,6 +7,11 @@ import {
   type AccessibilityCategory,
   type AccessibilityPointImage,
 } from "../components/AccessibilityResourcesManager";
+import type {
+  CampusBlockItem,
+  CampusMapPoint,
+} from "../components/CampusMapEditor";
+import CampusMapViewer from "../components/CampusMapViewer";
 import type { Tema } from "../layouts/MainLayout";
 import {
   extractPaletteFromImage,
@@ -77,6 +82,8 @@ function InstituicaoPublica() {
   );
   const [lightboxImage, setLightboxImage] =
     useState<AccessibilityPointImage | null>(null);
+  const [campusBlocks, setCampusBlocks] = useState<CampusBlockItem[]>([]);
+  const [campusPoints, setCampusPoints] = useState<CampusMapPoint[]>([]);
   const [extractedPalette, setExtractedPalette] = useState<{
     url: string;
     palette: HarmonicLogoPalette | null;
@@ -111,15 +118,17 @@ function InstituicaoPublica() {
       setLoading(true);
       setError(null);
       try {
-        const [instRes, ptsRes] = await Promise.all([
+        const [instRes, ptsRes, mapRes] = await Promise.all([
           fetch(`/api/institutions/${id}`),
           fetch(`/api/institutions/${id}/points`),
+          fetch(`/api/institutions/${id}/campus-map`),
         ]);
         const data = await instRes.json().catch(() => ({}));
         if (!instRes.ok) {
           throw new Error(data.message || "Instituição não encontrada.");
         }
         const ptsData = await ptsRes.json().catch(() => ({}));
+        const mapData = await mapRes.json().catch(() => ({}));
         if (!cancelled) {
           setInstitution(data);
           setPoints(Array.isArray(ptsData?.data) ? ptsData.data : []);
@@ -128,6 +137,8 @@ function InstituicaoPublica() {
               ? ptsData.availableCategories
               : []
           );
+          setCampusBlocks(Array.isArray(mapData?.blocks) ? mapData.blocks : []);
+          setCampusPoints(Array.isArray(mapData?.points) ? mapData.points : []);
           setSelectedCategoryId(null);
         }
       } catch (err) {
@@ -372,6 +383,14 @@ function InstituicaoPublica() {
         <div className="inst-publica-container">
           <div className="inst-publica-layout">
           <div className="inst-publica-principal">
+            {(campusBlocks.length > 0 || campusPoints.length > 0) && (
+              <CampusMapViewer
+                blocks={campusBlocks}
+                points={campusPoints}
+                onOpenImage={setLightboxImage}
+              />
+            )}
+
             {institution.floorPlanUrl && (
               <article className="inst-publica-box inst-publica-planta-card">
                 <div className="mapa-cabecalho">

@@ -401,6 +401,8 @@ export const ModelName = {
   PasswordResetToken: 'PasswordResetToken',
   AccessibilityCategory: 'AccessibilityCategory',
   AccessibilityPoint: 'AccessibilityPoint',
+  CampusBlock: 'CampusBlock',
+  CampusRoom: 'CampusRoom',
   AccessibilityImage: 'AccessibilityImage',
   Institution: 'Institution',
   Review: 'Review',
@@ -422,7 +424,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "passwordResetToken" | "accessibilityCategory" | "accessibilityPoint" | "accessibilityImage" | "institution" | "review" | "contactMessage" | "fAQItem" | "auditLog"
+    modelProps: "user" | "passwordResetToken" | "accessibilityCategory" | "accessibilityPoint" | "campusBlock" | "campusRoom" | "accessibilityImage" | "institution" | "review" | "contactMessage" | "fAQItem" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -687,6 +689,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.AccessibilityPointCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AccessibilityPointCountAggregateOutputType> | number
+        }
+      }
+    }
+    CampusBlock: {
+      payload: Prisma.$CampusBlockPayload<ExtArgs>
+      fields: Prisma.CampusBlockFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CampusBlockFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusBlockPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CampusBlockFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusBlockPayload>
+        }
+        findFirst: {
+          args: Prisma.CampusBlockFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusBlockPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CampusBlockFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusBlockPayload>
+        }
+        findMany: {
+          args: Prisma.CampusBlockFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusBlockPayload>[]
+        }
+        create: {
+          args: Prisma.CampusBlockCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusBlockPayload>
+        }
+        createMany: {
+          args: Prisma.CampusBlockCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CampusBlockDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusBlockPayload>
+        }
+        update: {
+          args: Prisma.CampusBlockUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusBlockPayload>
+        }
+        deleteMany: {
+          args: Prisma.CampusBlockDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CampusBlockUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CampusBlockUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusBlockPayload>
+        }
+        aggregate: {
+          args: Prisma.CampusBlockAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCampusBlock>
+        }
+        groupBy: {
+          args: Prisma.CampusBlockGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CampusBlockGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CampusBlockCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CampusBlockCountAggregateOutputType> | number
+        }
+      }
+    }
+    CampusRoom: {
+      payload: Prisma.$CampusRoomPayload<ExtArgs>
+      fields: Prisma.CampusRoomFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CampusRoomFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusRoomPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CampusRoomFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusRoomPayload>
+        }
+        findFirst: {
+          args: Prisma.CampusRoomFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusRoomPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CampusRoomFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusRoomPayload>
+        }
+        findMany: {
+          args: Prisma.CampusRoomFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusRoomPayload>[]
+        }
+        create: {
+          args: Prisma.CampusRoomCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusRoomPayload>
+        }
+        createMany: {
+          args: Prisma.CampusRoomCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CampusRoomDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusRoomPayload>
+        }
+        update: {
+          args: Prisma.CampusRoomUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusRoomPayload>
+        }
+        deleteMany: {
+          args: Prisma.CampusRoomDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CampusRoomUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CampusRoomUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampusRoomPayload>
+        }
+        aggregate: {
+          args: Prisma.CampusRoomAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCampusRoom>
+        }
+        groupBy: {
+          args: Prisma.CampusRoomGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CampusRoomGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CampusRoomCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CampusRoomCountAggregateOutputType> | number
         }
       }
     }
@@ -1172,11 +1306,47 @@ export const AccessibilityPointScalarFieldEnum = {
   description: 'description',
   active: 'active',
   reportCount: 'reportCount',
+  mapBlockId: 'mapBlockId',
+  mapX: 'mapX',
+  mapY: 'mapY',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type AccessibilityPointScalarFieldEnum = (typeof AccessibilityPointScalarFieldEnum)[keyof typeof AccessibilityPointScalarFieldEnum]
+
+
+export const CampusBlockScalarFieldEnum = {
+  id: 'id',
+  institutionId: 'institutionId',
+  name: 'name',
+  subtitle: 'subtitle',
+  x: 'x',
+  y: 'y',
+  width: 'width',
+  height: 'height',
+  color: 'color',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CampusBlockScalarFieldEnum = (typeof CampusBlockScalarFieldEnum)[keyof typeof CampusBlockScalarFieldEnum]
+
+
+export const CampusRoomScalarFieldEnum = {
+  id: 'id',
+  blockId: 'blockId',
+  name: 'name',
+  roomType: 'roomType',
+  x: 'x',
+  y: 'y',
+  width: 'width',
+  height: 'height',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CampusRoomScalarFieldEnum = (typeof CampusRoomScalarFieldEnum)[keyof typeof CampusRoomScalarFieldEnum]
 
 
 export const AccessibilityImageScalarFieldEnum = {
@@ -1318,6 +1488,23 @@ export const AccessibilityPointOrderByRelevanceFieldEnum = {
 } as const
 
 export type AccessibilityPointOrderByRelevanceFieldEnum = (typeof AccessibilityPointOrderByRelevanceFieldEnum)[keyof typeof AccessibilityPointOrderByRelevanceFieldEnum]
+
+
+export const CampusBlockOrderByRelevanceFieldEnum = {
+  name: 'name',
+  subtitle: 'subtitle',
+  color: 'color'
+} as const
+
+export type CampusBlockOrderByRelevanceFieldEnum = (typeof CampusBlockOrderByRelevanceFieldEnum)[keyof typeof CampusBlockOrderByRelevanceFieldEnum]
+
+
+export const CampusRoomOrderByRelevanceFieldEnum = {
+  name: 'name',
+  roomType: 'roomType'
+} as const
+
+export type CampusRoomOrderByRelevanceFieldEnum = (typeof CampusRoomOrderByRelevanceFieldEnum)[keyof typeof CampusRoomOrderByRelevanceFieldEnum]
 
 
 export const AccessibilityImageOrderByRelevanceFieldEnum = {
@@ -1617,6 +1804,8 @@ export type GlobalOmitConfig = {
   passwordResetToken?: Prisma.PasswordResetTokenOmit
   accessibilityCategory?: Prisma.AccessibilityCategoryOmit
   accessibilityPoint?: Prisma.AccessibilityPointOmit
+  campusBlock?: Prisma.CampusBlockOmit
+  campusRoom?: Prisma.CampusRoomOmit
   accessibilityImage?: Prisma.AccessibilityImageOmit
   institution?: Prisma.InstitutionOmit
   review?: Prisma.ReviewOmit

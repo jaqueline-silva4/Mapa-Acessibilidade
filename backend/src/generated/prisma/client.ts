@@ -62,6 +62,16 @@ export type AccessibilityCategory = Prisma.AccessibilityCategoryModel
  */
 export type AccessibilityPoint = Prisma.AccessibilityPointModel
 /**
+ * Model CampusBlock
+ * 
+ */
+export type CampusBlock = Prisma.CampusBlockModel
+/**
+ * Model CampusRoom
+ * 
+ */
+export type CampusRoom = Prisma.CampusRoomModel
+/**
  * Model AccessibilityImage
  * 
  */
