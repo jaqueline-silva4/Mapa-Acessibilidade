@@ -1,12 +1,12 @@
-FROM node:22-alpine
+FROM node:22-bookworm-slim
 
 WORKDIR /app
 
 # Instala OpenSSL para o Prisma Client
-RUN apk add --no-cache openssl
+RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
 
 COPY package*.json ./
-RUN npm ci
+RUN npm ci || npm install --no-audit --no-fund
 
 COPY tsconfig.json prisma.config.ts ./
 COPY prisma ./prisma
