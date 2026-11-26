@@ -356,6 +356,17 @@
   font-weight: 500;
 }
 
+@media (max-width: 1024px) {
+  .inst-publica-capa {
+    min-height: 300px;
+  }
+
+  .inst-publica-layout {
+    grid-template-columns: 1.35fr 1fr;
+    gap: 18px;
+  }
+}
+
 @media (max-width: 900px) {
   .inst-publica-layout {
     grid-template-columns: 1fr;
@@ -363,28 +374,90 @@
 }
 
 @media (max-width: 640px) {
-  .inst-publica-capa {
-    min-height: 260px;
+  .inst-publica-topbar {
+    padding: 10px 16px;
   }
 
-  .inst-publica-logo {
-    width: 84px;
-    height: 84px;
-    border-radius: 18px;
-    font-size: 1.6rem;
+  .inst-publica-acessa-logo {
+    height: 38px;
   }
 
-  .inst-publica-perfil-barra {
-    padding: 84px 20px 22px;
+  .inst-publica-contato-btn {
+    min-height: 36px;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+  }
+
+  .inst-publica {
+    padding: 0 0 44px;
+  }
+
+  .inst-publica-container {
+    margin-top: 18px;
+    padding: 0 16px;
     gap: 16px;
   }
 
+  .inst-publica-principal {
+    gap: 16px;
+  }
+
+  .inst-publica-box {
+    padding: 18px 16px;
+    border-radius: 14px;
+  }
+
+  .inst-publica-capa {
+    min-height: 250px;
+  }
+
+  .inst-publica-logo {
+    width: 82px;
+    height: 82px;
+    border-radius: 18px;
+    font-size: 1.5rem;
+  }
+
+  .inst-publica-perfil-barra {
+    padding: 72px 16px 20px;
+    gap: 14px;
+  }
+
   .inst-publica-titulo h1 {
-    font-size: 1.6rem;
+    font-size: 1.45rem;
   }
 
   .inst-publica-mapa-frame {
-    height: 260px;
+    height: 250px;
+  }
+
+  .recurso-publico-foto-btn {
+    width: 88px;
+    height: 68px;
+  }
+
+  .inst-publica-footer {
+    padding: 16px;
+  }
+
+  .inst-publica-footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 420px) {
+  .inst-publica-perfil-barra {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 48px 16px 18px;
+    gap: 12px;
+  }
+
+  .inst-publica-titulo {
+    min-width: 0;
+    width: 100%;
   }
 }
 

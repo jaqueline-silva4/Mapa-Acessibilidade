@@ -252,6 +252,27 @@
   color: #e8f0f7;
 }
 
+@media (max-width: 480px) {
+  .login-page {
+    padding: 20px 14px;
+  }
+
+  .login-cartao {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .login-marca {
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+  }
+
+  .login-titulo {
+    font-size: 1.35rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .login-cartao {
     animation: none;

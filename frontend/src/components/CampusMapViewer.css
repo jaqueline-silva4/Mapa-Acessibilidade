@@ -198,6 +198,35 @@
   }
 }
 
+@media (max-width: 640px) {
+  .campus-viewer-canvas {
+    aspect-ratio: 4 / 3;
+    min-height: 250px;
+  }
+
+  .campus-viewer-block {
+    padding: 6px 8px;
+    border-radius: 8px;
+  }
+
+  .campus-viewer-block-title {
+    font-size: 0.72rem;
+  }
+
+  .campus-viewer-block-sub {
+    display: none;
+  }
+
+  .campus-viewer-block-meta {
+    font-size: 0.62rem;
+  }
+
+  .campus-viewer-pin {
+    padding: 3px 8px;
+    font-size: 0.66rem;
+  }
+}
+
 :root[data-theme='escuro']
   .inst-publica-page:not(.high-contrast)
   .campus-viewer-canvas,

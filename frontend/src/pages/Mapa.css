@@ -177,9 +177,23 @@
   color: #31485e;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .mapa-leaflet {
-    height: 420px;
+    height: 480px;
+  }
+}
+
+@media (max-width: 640px) {
+  .mapa-pagina {
+    padding: 24px 16px 48px;
+  }
+
+  .mapa-header h1 {
+    font-size: 1.55rem;
+  }
+
+  .mapa-leaflet {
+    height: 360px;
   }
 }
 
