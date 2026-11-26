@@ -7,7 +7,11 @@ const links = [
   { label: 'FAQ', href: '/faq' },
 ]
 
-export default function Navbar() {
+interface NavbarProps {
+  onNavigate?: () => void
+}
+
+export default function Navbar({ onNavigate }: NavbarProps) {
   return (
     <nav id="menu-principal" tabIndex={-1} className="navbar" aria-label="Navegação principal">
       <ul className="navbar-list">
@@ -16,6 +20,7 @@ export default function Navbar() {
             <NavLink
               to={link.href}
               end={link.href === '/'}
+              onClick={onNavigate}
               className={({ isActive }) =>
                 isActive ? 'active' : ''
               }

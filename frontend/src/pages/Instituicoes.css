@@ -126,6 +126,7 @@
 .instituicao-select {
   height: 42px;
   padding: 0 14px;
+  line-height: 40px;
   border: 1px solid #c8d8e6;
   border-radius: 999px;
   background-color: #f4f9fd;

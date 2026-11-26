@@ -83,7 +83,16 @@ function MainLayout() {
         setTema={setTema}
       />
 
-      <Header />
+      <Header
+        accessibility={{
+          highContrast,
+          setHighContrast,
+          fontScale,
+          setFontScale,
+          tema,
+          setTema,
+        }}
+      />
 
       <main
         id="conteudo-principal"
